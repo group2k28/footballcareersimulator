@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070b14">
+<meta name="description" content="Football Career Simulator - a local, single-player football career game.">
+<title>Football Career Simulator</title>
+<style>
+:root{--bg:#070b14;--panel:#0e1626;--panel2:#121d31;--line:#23324b;--text:#eef4ff;--muted:#8fa2bf;--accent:#39e58c;--accent2:#5da9ff;--danger:#ff6678;--gold:#ffd166;--shadow:0 14px 40px #0007}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#142542 0,#070b14 42%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}button,input,select{font:inherit}button{border:0;cursor:pointer}.wrap{max-width:1200px;margin:auto;padding:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#138a62);display:grid;place-items:center;color:#04120b;font-weight:900;font-size:21px}.hero{min-height:100vh;display:grid;place-items:center}.hero-card{width:min(760px,100%);padding:34px;border:1px solid var(--line);background:#0b1220eF;border-radius:28px;box-shadow:var(--shadow)}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(34px,6vw,62px);line-height:1;margin:18px 0 12px}.sub{color:var(--muted);line-height:1.6}.actions{display:grid;gap:12px;margin-top:24px}.btn{padding:14px 17px;border-radius:13px;background:var(--panel2);color:var(--text);border:1px solid var(--line);font-weight:750}.btn:hover{border-color:#44648f}.btn.primary{background:var(--accent);color:#06140d;border-color:transparent}.btn.blue{background:var(--accent2);color:#06101e}.btn.danger{background:#3a1720;color:#ff9cab;border-color:#642533}.btn:disabled{opacity:.4;cursor:not-allowed}.top{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:18px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:linear-gradient(180deg,#101a2b,#0c1423);border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 8px 25px #0003}.stat{font-size:26px;font-weight:850}.label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:#17253a;color:#b9c9df;font-size:12px;font-weight:700}.green{color:var(--accent)}.gold{color:var(--gold)}.red{color:var(--danger)}.muted{color:var(--muted)}.form{display:grid;gap:12px}.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}.field input,.field select{width:100%;background:#09111f;border:1px solid var(--line);color:var(--text);padding:13px;border-radius:11px;outline:none}.field input:focus,.field select:focus{border-color:var(--accent2)}.bar{height:8px;background:#172238;border-radius:99px;overflow:hidden;margin-top:7px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:inherit}.nav{display:flex;gap:7px;overflow:auto;padding:6px 0 14px;position:sticky;top:0;background:#070b14ee;backdrop-filter:blur(12px);z-index:3}.nav button{white-space:nowrap;background:#0e1727;border:1px solid var(--line);color:#aebed5;padding:10px 12px;border-radius:10px}.nav button.active{background:#183029;color:var(--accent);border-color:#2c7657}.section{margin:15px 0}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:620px}.table th,.table td{text-align:left;padding:11px 9px;border-bottom:1px solid #1b2940}.table th{color:var(--muted);font-size:12px;text-transform:uppercase}.notice{padding:11px 13px;border-radius:12px;background:#111f32;border:1px solid var(--line);margin-bottom:8px}.challenge{display:flex;justify-content:space-between;gap:12px;align-items:center}.mini{font-size:12px;color:var(--muted)}.modal{position:fixed;inset:0;background:#0009;display:grid;place-items:center;padding:18px;z-index:10}.modal>div{width:min(520px,100%);background:#0d1728;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}.toast{position:fixed;right:18px;bottom:18px;background:#10231b;border:1px solid #2d7657;padding:13px 15px;border-radius:12px;z-index:20;box-shadow:var(--shadow)}.empty{text-align:center;padding:35px;color:var(--muted)}.back{background:transparent;color:var(--muted);padding:0}.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;text-align:center}.team{padding:12px;border:1px solid var(--line);border-radius:14px;background:#0b1321}.decision{cursor:pointer;text-align:left}.decision.selected{border-color:var(--accent);background:#153025}.decision b{display:block;margin-bottom:5px}.score{font-size:34px;font-weight:900}.tag{font-size:11px;color:var(--muted)}.match-live{max-width:760px!important}.match-header{display:flex;justify-content:space-between;gap:12px;align-items:center}.match-scoreboard{padding:18px;border-radius:18px;background:#09111f;border:1px solid var(--line);text-align:center;margin:14px 0}.live-score{font-size:42px;font-weight:900}.match-clock{color:var(--gold);font-weight:800}.match-event{padding:10px 12px;border-left:3px solid var(--accent2);background:#101c2e;border-radius:8px;margin:7px 0;font-size:13px}.match-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.match-actions .btn{min-height:68px}.match-result{font-size:18px;text-align:center;padding:16px;border-radius:14px;background:#101c2e;border:1px solid var(--line)}@media(max-width:520px){.match-actions{grid-template-columns:1fr}.match-header{flex-direction:column;align-items:flex-start}}@media(max-width:800px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.hero-card{padding:24px}}@media(max-width:520px){.wrap{padding:13px}.g2,.g3,.g4{grid-template-columns:1fr}.hero-card{border-radius:18px}.match{grid-template-columns:1fr}.score{font-size:28px}.top-actions{width:100%}.top-actions .btn{flex:1}}
+
+/* FINAL RESPONSIVE PASS */
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{overflow-x:hidden;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+button,input,select{min-height:44px;touch-action:manipulation}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
+img,video,canvas{max-width:100%;height:auto}
+.wrap{width:100%;max-width:1280px;margin-inline:auto;padding:clamp(12px,2vw,24px)}
+.hero{padding:clamp(12px,3vw,32px);min-height:100svh}
+.hero-card{width:min(820px,100%);max-height:calc(100svh - 24px);overflow:auto}
+.top-actions .btn{min-width:0}
+.grid{min-width:0}
+.card{min-width:0;overflow-wrap:anywhere}
+.nav{scrollbar-width:thin;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}
+.nav button{min-height:44px;flex:0 0 auto}
+.table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.field input,.field select{font-size:16px}
+.modal{overflow:auto;align-items:center}
+.modal>div{max-height:calc(100svh - 24px);overflow:auto}
+.toast{max-width:min(420px,calc(100vw - 24px));right:12px;bottom:max(12px,env(safe-area-inset-bottom));}
+@media (max-width:900px){
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .top{align-items:flex-start;flex-direction:column}
+  .top-actions{width:100%}
+  .top-actions .btn{flex:1 1 140px}
+}
+@media (max-width:680px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .wrap{padding:12px}
+  .hero{padding:12px}
+  .hero-card{padding:20px;border-radius:20px}
+  h1{font-size:clamp(30px,10vw,48px)}
+  h2{font-size:clamp(20px,6vw,30px)}
+  .card{padding:14px;border-radius:15px}
+  .btn{width:100%;padding:13px 14px}
+  .top-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .top-actions .btn:last-child{grid-column:1/-1}
+  .nav{position:sticky;top:0;padding:6px 0 10px;margin-inline:-2px}
+  .nav button{padding:10px 11px}
+  .match{grid-template-columns:1fr}
+  .match-actions{grid-template-columns:1fr}
+  .match-actions .btn{min-height:56px}
+  .live-score{font-size:clamp(32px,11vw,44px)}
+}
+@media (max-width:380px){
+  .wrap{padding:9px}
+  .card{padding:12px}
+  .top-actions{grid-template-columns:1fr}
+  .top-actions .btn:last-child{grid-column:auto}
+  .stat{font-size:23px}
+  .nav button{font-size:12px;padding:9px 10px}
+}
+@media (orientation:landscape) and (max-height:520px){
+  .hero{min-height:100svh;align-items:start;padding-top:10px}
+  .hero-card{max-height:calc(100svh - 20px)}
+  .nav{position:sticky;top:0}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+</style>
+</head>
+<body><div id="app"></div><script>
+'use strict';
+const KEY='fcs_static_save_v1';
+const clubs=[
+['mnu','Manchester United','MUN','Premier League','England',82,84,'Old Trafford'],['mci','Manchester City','MCI','Premier League','England',91,92,'Etihad Stadium'],['liv','Liverpool','LIV','Premier League','England',89,89,'Anfield'],['ars','Arsenal','ARS','Premier League','England',86,86,'Emirates Stadium'],['che','Chelsea','CHE','Premier League','England',82,84,'Stamford Bridge'],['rma','Real Madrid','RMA','La Liga','Spain',92,96,'Santiago Bernabéu'],['bar','Barcelona','BAR','La Liga','Spain',88,92,'Spotify Camp Nou'],['atm','Atlético Madrid','ATM','La Liga','Spain',84,86,'Metropolitano'],['bmu','Bayern Munich','BAY','Bundesliga','Germany',90,92,'Allianz Arena'],['bvb','Borussia Dortmund','BVB','Bundesliga','Germany',81,82,'Signal Iduna Park'],['juv','Juventus','JUV','Serie A','Italy',83,86,'Allianz Stadium'],['mil','AC Milan','MIL','Serie A','Italy',81,84,'San Siro'],['int','Inter Milan','INT','Serie A','Italy',86,87,'San Siro'],['psg','Paris Saint-Germain','PSG','Ligue 1','France',88,90,'Parc des Princes'],['aja','Ajax','AJA','Eredivisie','Netherlands',78,78,'Johan Cruyff Arena'],['ben','Benfica','BEN','Primeira Liga','Portugal',80,80,'Estádio da Luz'],['por','Porto','POR','Primeira Liga','Portugal',79,79,'Estádio do Dragão'],['spo','Sporting CP','SPO','Primeira Liga','Portugal',78,78,'Estádio José Alvalade'],['fla','Flamengo','FLA','Brasileirão','Brazil',80,78,'Maracanã'],['pal','Palmeiras','PAL','Brasileirão','Brazil',79,77,'Allianz Parque'],['boc','Boca Juniors','BOC','Primera División','Argentina',78,78,'La Bombonera'],['riv','River Plate','RIV','Primera División','Argentina',78,78,'El Monumental'],['gal','Galatasaray','GAL','Süper Lig','Turkey',75,73,'Rams Park'],['fen','Fenerbahçe','FEN','Süper Lig','Turkey',74,72,'Şükrü Saracoğlu'],['cel','Celtic','CEL','Scottish Premiership','Scotland',74,72,'Celtic Park'],['ran','Rangers','RAN','Scottish Premiership','Scotland',73,71,'Ibrox Stadium'],['nig','Lagos United','LAG','Nigeria Premier League','Nigeria',62,60,'National Stadium'],['eni','Enugu Rangers','ENU','Nigeria Premier League','Nigeria',61,59,'Nnamdi Azikiwe Stadium'],['aba','Enyimba','ENY','Nigeria Premier League','Nigeria',64,62,'Enyimba Stadium']
+].map(x=>({id:x[0],name:x[1],short:x[2],league:x[3],country:x[4],strength:x[5],reputation:x[6],stadium:x[7]}));
+const positions=['GK','CB','LB','RB','CM','CAM','CDM','LW','RW','ST'];
+const base={GK:[45,30,50,35,60,55],CB:[55,35,55,45,70,70],LB:[65,40,60,55,65,60],RB:[65,40,60,55,65,60],CM:[55,50,70,60,55,55],CAM:[60,55,75,70,40,50],CDM:[50,45,65,55,70,65],LW:[70,55,60,75,35,50],RW:[70,55,60,75,35,50],ST:[65,70,50,65,30,60]};
+const weights={GK:[.1,.05,.2,.05,.3,.3],CB:[.15,.05,.15,.1,.35,.2],LB:[.2,.05,.2,.15,.25,.15],RB:[.2,.05,.2,.15,.25,.15],CM:[.1,.15,.3,.2,.15,.1],CAM:[.1,.2,.3,.25,.05,.1],CDM:[.1,.1,.25,.15,.3,.1],LW:[.2,.2,.15,.3,.05,.1],RW:[.2,.2,.15,.3,.05,.1],ST:[.2,.35,.1,.2,.05,.1]};
+const overall=a=>Math.round(a.reduce((s,v,i)=>s+v*weights[state?.player?.position||'ST'][i],0));
+function club(id){return clubs.find(c=>c.id===id)||clubs[0]}
+function fmtMoney(n){if(n>=1000000)return '€'+(n/1000000).toFixed(1)+'M';if(n>=1000)return '€'+Math.round(n/1000)+'K';return '€'+Math.round(n)}
+function calcOverall(p){let w=weights[p.position],a=[p.attrs.pace,p.attrs.shooting,p.attrs.passing,p.attrs.dribbling,p.attrs.defending,p.attrs.physical];return Math.round(a.reduce((s,v,i)=>s+v*w[i],0))}
+function market(p){let v=p.overall*100000*(p.age<23?1.5:p.age<=25?1.2:p.age<=30?.9:.55);v*=1+p.season.goals*.04+p.season.assists*.025+p.reputation/250;return Math.round(v/10000)*10000}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function choose(a){return a[Math.floor(Math.random()*a.length)]}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function toast(msg){const e=document.createElement('div');e.className='toast';e.textContent=msg;document.body.appendChild(e);setTimeout(()=>e.remove(),2600)}
+let state=null,view='dashboard',confirmClear=false;
+function save(){if(!state)return;state.lastSaved=Date.now();localStorage.setItem(KEY,JSON.stringify(state))}
+function migrate(s){s.management=s.management||{prep:null,clubConfidence:55,managerTrust:50,objectives:makeObjectives(),seasonTarget:15,weeklyPlan:'balanced'};s.management.objectives=s.management.objectives||makeObjectives();s.player.energy=s.player.energy??100;s.player.fitness=s.player.fitness??90;s.player.form=s.player.form??70;s.player.morale=s.player.morale??75;s.player.contractYears=s.player.contractYears??3;s.clubConfidence=s.clubConfidence??55;return s}
+function load(){try{let s=JSON.parse(localStorage.getItem(KEY));if(s&&s.player&&s.club){state=migrate(s);return true}}catch(e){}return false}
+function newGame(data){let b=base[data.position],attrs={pace:b[0]+rand(0,4),shooting:b[1]+rand(0,4),passing:b[2]+rand(0,4),dribbling:b[3]+rand(0,4),defending:b[4]+rand(0,4),physical:b[5]+rand(0,4)};let p={name:data.name,nationality:data.nationality,age:15,position:data.position,foot:data.foot,attrs,overall:0,potential:rand(78,91),form:70,morale:75,fitness:90,energy:100,reputation:20,marketValue:0,weeklySalary:500,contractYears:3,clubId:'nig',goals:0,assists:0,appearances:0,careerGoals:0,careerAssists:0,careerAppearances:0,trophies:[],awards:[],isRetired:false};p.overall=calcOverall(p);p.marketValue=market(p);let r=makeRival(p);return{player:p,club:club(p.clubId),currentWeek:1,currentSeason:1,balance:3000,careerEarnings:0,reputation:20,rival:r,challenges:makeChallenges(),notifications:[],matches:[],history:[],season:{goals:0,assists:0,appearances:0,ratingTotal:0},seasonTrophies:[],isRetired:false,settings:{sound:true,music:true,animations:true},management:{prep:null,clubConfidence:55,managerTrust:50,objectives:makeObjectives(),seasonTarget:15,weeklyPlan:'balanced'},lastSaved:Date.now()}}
+function makeRival(p){let pool=['rma','bar','mci','liv','bmu','psg','juv','ars'];return{id:uid(),name:choose(['Alex Moreno','Daniel Silva','Leo Martins','Noah Carter','Mikael Santos','Victor Adeyemi','Julian Costa','Ethan Williams']),age:rand(16,19),position:p.position,clubId:choose(pool),overall:Math.max(65,p.overall+rand(-2,6)),potential:rand(84,96),goals:rand(0,8),assists:rand(0,6),appearances:rand(5,12),trophies:0,reputation:35,marketValue:0,internationalGoals:0,form:rand(65,82)}}
+function makeChallenges(){return[
+['debut','Professional Debut','Make your first appearance.',1,'Career'],['g10','Goal Hunter','Score 10 career goals.',10,'Career'],['a10','Creative Force','Record 10 career assists.',10,'Career'],['ov70','Breakthrough','Reach 70 overall.',70,'Career'],['ov80','Star Quality','Reach 80 overall.',80,'Career'],['trophy','First Trophy','Win your first trophy.',1,'Career'],['rival','Rivalry Winner','Finish a season ahead of your rival.',1,'Rivalry'],['apps50','50 Appearances','Reach 50 career appearances.',50,'Career'],['goals100','Century','Score 100 career goals.',100,'Career'],['intl','International Debut','Make your first international appearance.',1,'Achievement']].map(x=>({id:x[0],name:x[1],description:x[2],target:x[3],progress:0,reward:x[4]==='Rivalry'?'+10 reputation':'+5 reputation',completed:false,category:x[4]}))}
+function makeObjectives(){return [{id:'ov',name:'Develop the Player',description:'Reach your next overall milestone.',target:70,progress:0,reward:'+5 reputation'}, {id:'apps',name:'Earn Your Place',description:'Make 15 appearances this season.',target:15,progress:0,reward:'+5 manager trust'}, {id:'goals',name:'Contribute Goals',description:'Score 8 goals this season.',target:8,progress:0,reward:'+€1,000'}, {id:'rival',name:'Beat the Rival',description:'Finish the season ahead of your rival.',target:1,progress:0,reward:'+10 reputation'}]}
+function syncObjectives(){let m=state.management,p=state.player;let season=state.season;let o=m.objectives||[];o.forEach(x=>{if(x.id==='ov')x.progress=Math.min(x.target,p.overall);if(x.id==='apps')x.progress=Math.min(x.target,season.appearances);if(x.id==='goals')x.progress=Math.min(x.target,season.goals)});return o}
+function choosePlan(plan){if(state.management.prep){toast('You already chose this week plan.');return}let p=state.player,m=state.management;let effects={intensive:['Intensive Training',0,-12,3,0,0],tactical:['Tactical Preparation',0,-6,2,5,2],recovery:['Recovery',15,5,0,0,3],individual:['Individual Focus',-5,-5,2,0,1],team:['Team Chemistry',5,-4,1,3,4]};let e=effects[plan];m.prep=plan;m.weeklyPlan=e[0];p.energy=Math.max(0,p.energy+e[1]);p.fitness=Math.max(25,p.fitness+e[2]);p.form=Math.min(99,p.form+e[3]);p.morale=Math.min(100,p.morale+e[4]);m.managerTrust=Math.max(0,Math.min(100,m.managerTrust+e[5]));addNotice('management',`Weekly plan selected: ${e[0]}.`);save();render()}
+function resetWeeklyPlan(){if(state.management)state.management.prep=null}
+function management(){let p=state.player,m=state.management||{};syncObjectives();let plans=[['intensive','Intensive Training','Push development hard','+form · -fitness'],['tactical','Tactical Preparation','Prepare specifically for the match','+match performance · +trust'],['recovery','Recovery Week','Protect fitness and morale','+fitness · slower development'],['individual','Individual Focus','Work on your weakest area','+development · -energy'],['team','Team Chemistry','Build relationships with teammates','+morale · +trust']];return `<div class="grid g2"><div class="card"><h2>Weekly Management</h2><p class="muted">You are not just playing matches—you decide how the week is managed.</p><div class="grid g2">${plans.map(x=>`<button class="card decision ${m.prep===x[0]?'selected':''}" onclick="choosePlan('${x[0]}')"><b>${x[1]}</b><span class="mini">${x[2]}</span><br><span class="mini">${x[3]}</span></button>`).join('')}</div><div class="notice" style="margin-top:14px">Current plan: <b>${m.weeklyPlan||'None'}</b><br>Manager trust: <b>${m.managerTrust||50}</b> · Club confidence: <b>${m.clubConfidence||55}</b></div></div><div class="card"><h2>Season Objectives</h2>${m.objectives.map(x=>`<div class="notice"><b>${x.name}</b><br><span class="mini">${x.description}</span><div class="bar"><i style="width:${Math.min(100,x.progress/x.target*100)}%"></i></div><span class="mini">${x.progress}/${x.target} · Reward ${x.reward}</span></div>`).join('')}</div></div><div class="grid g3 section"><div class="card"><div class="label">Energy</div><div class="stat">${p.energy}</div></div><div class="card"><div class="label">Fitness</div><div class="stat">${p.fitness}</div></div><div class="card"><div class="label">Manager Trust</div><div class="stat">${m.managerTrust||50}</div></div></div>`}
+function addNotice(type,message){state.notifications.unshift({id:uid(),type,message,week:state.currentWeek,season:state.currentSeason,read:false});state.notifications=state.notifications.slice(0,30)}
+function challengeProgress(){let p=state.player,c=state.challenges;c.find(x=>x.id==='debut').progress=Math.min(1,p.careerAppearances);c.find(x=>x.id==='g10').progress=Math.min(10,p.careerGoals);c.find(x=>x.id==='a10').progress=Math.min(10,p.careerAssists);c.find(x=>x.id==='ov70').progress=Math.min(70,p.overall);c.find(x=>x.id==='ov80').progress=Math.min(80,p.overall);c.find(x=>x.id==='trophy').progress=Math.min(1,p.trophies.length);c.find(x=>x.id==='apps50').progress=Math.min(50,p.careerAppearances);c.find(x=>x.id==='goals100').progress=Math.min(100,p.careerGoals);c.forEach(x=>{if(x.progress>=x.target&&!x.completed){x.completed=true;state.player.reputation+=5;state.balance+=500;addNotice('milestone','Challenge completed: '+x.name+' (+€500, +5 reputation)')}})}
+function simulateMatchEngine(){if(state.player.isRetired)return;let p=state.player,m=state.management||{};if(p.fitness<40){toast('You are not fit enough to play. Choose recovery.');return}if(!m.prep){toast('Choose a weekly management plan first.');setView('management');return}let opp=choose(clubs.filter(c=>c.id!==state.club.id));let home=Math.random()>.45;let planBoost=m.prep==='tactical'?3:m.prep==='team'?2:m.prep==='intensive'?1:0;let team=state.club.strength+(p.overall-65)*.22+(p.form-70)*.12+(p.fitness-70)*.06+(p.morale-70)*.05+(home?3:0)+planBoost;let os=opp.strength+rand(-5,5);let teamScore=Math.max(0,Math.round((team/28)+Math.random()*2-1));let oppScore=Math.max(0,Math.round((os/30)+Math.random()*2-1));let involved=Math.random()<(p.position==='ST'||p.position==='LW'||p.position==='RW'||p.position==='CAM'?.72:.35);let goals=involved?rand(0,Math.min(3,Math.max(0,teamScore))):0;let assists=involved&&teamScore>0?rand(0,Math.min(2,Math.max(0,teamScore-goals))):0;let rating=Math.max(5,Math.min(10,6.2+(teamScore-oppScore)*.45+goals*.8+assists*.45+rand(-5,5)/10+(m.prep==='tactical'?.25:0)));let result=teamScore>oppScore?'win':teamScore===oppScore?'draw':'loss';let mm={id:uid(),week:state.currentWeek,season:state.currentSeason,opponent:opp.name,opponentId:opp.id,home,teamScore,opponentScore:oppScore,goals,assists,rating:+rating.toFixed(1),competition:'League'};state.matches.unshift(mm);p.appearances++;p.careerAppearances++;p.goals+=goals;p.assists+=assists;p.careerGoals+=goals;p.careerAssists+=assists;p.form=Math.max(40,Math.min(99,p.form+(rating>=7.5?3:-1)));p.morale=Math.max(35,Math.min(100,p.morale+(result==='win'?4:result==='draw'?0:-3)));p.fitness=Math.max(25,p.fitness-rand(8,16));p.energy=Math.max(0,p.energy-rand(20,35));state.season.goals+=goals;state.season.assists+=assists;state.season.appearances++;state.season.ratingTotal+=rating;p.reputation+=result==='win'?1:0;state.balance+=p.weeklySalary;state.careerEarnings+=p.weeklySalary;m.managerTrust=Math.max(0,Math.min(100,m.managerTrust+(rating>=7?2:rating<6?-2:0)));m.clubConfidence=Math.max(0,Math.min(100,m.clubConfidence+(result==='win'?3:result==='loss'?-2:0)));m.prep=null;m.weeklyPlan='balanced';state.currentWeek++;if(state.currentWeek>38)endSeason();else{randomEvent()}challengeProgress();updateRival();p.marketValue=market(p);save();toast(`${state.club.short} ${teamScore}-${oppScore} ${opp.short} · ${rating.toFixed(1)}/10`);render()}
+
+
+/* INTERACTIVE MATCHDAY */
+let liveMatch=null;
+function startInteractiveMatch(){
+ if(state.player.isRetired)return;
+ let p=state.player,m=state.management||{};
+ if(p.fitness<40){toast('You are not fit enough to play. Choose recovery.');return}
+ if(!m.prep){toast('Choose a weekly management plan first.');setView('management');return}
+ let opp=choose(clubs.filter(c=>c.id!==state.club.id));
+ let home=Math.random()>.45;
+ liveMatch={opp,home,minute:1,score:0,oppScore:0,actions:0,attack:0,defend:0,events:[],goals:0,assists:0,ratingBase:6.2};
+ playMusic((opp.id===state.rival?.clubId)?'rival':'main');
+ renderMatchModal();
+}
+function renderMatchModal(){
+ if(!liveMatch)return;
+ let p=state.player,c=state.club,r=liveMatch.opp;
+ let label=liveMatch.home?`${c.short} vs ${r.short}`:`${r.short} vs ${c.short}`;
+ document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="liveMatchModal"><div class="match-live">
+ <div class="match-header"><div><div class="mini">MATCHDAY · ${liveMatch.minute}'</div><h2>${esc(c.name)} vs ${esc(r.name)}</h2><div class="muted">${esc(c.stadium)} · ${liveMatch.home?'Home':'Away'}</div></div><div class="pill">${p.position} · ${p.overall} OVR</div></div>
+ <div class="match-scoreboard"><div class="match-clock">${liveMatch.minute}'</div><div class="live-score">${liveMatch.home?liveMatch.score:liveMatch.oppScore} – ${liveMatch.home?liveMatch.oppScore:liveMatch.score}</div><div class="mini">${esc(label)}</div></div>
+ <div class="card"><b>Live Match Events</b>${liveMatch.events.slice(-5).map(e=>`<div class="match-event">${e}</div>`).join('')||'<div class="mini" style="margin-top:8px">The match has just kicked off.</div>'}</div>
+ <div class="card" style="margin-top:12px"><b>What do you do?</b><p class="mini">Decision ${liveMatch.actions+1} of 3 · Your choices affect the final result and rating.</p><div class="match-actions">
+ <button class="btn primary" onclick="matchDecision('attack')">⚡ Attack<br><span class="mini">Create a chance</span></button>
+ <button class="btn blue" onclick="matchDecision('pass')">🎯 Build Up<br><span class="mini">Keep possession</span></button>
+ <button class="btn" onclick="matchDecision('defend')">🛡️ Defend<br><span class="mini">Protect the team</span></button>
+ </div></div>
+ <button class="btn danger" style="width:100%;margin-top:10px" onclick="cancelInteractiveMatch()">Leave Match</button>
+ </div></div>`);
+}
+function closeMatchModal(){document.getElementById('liveMatchModal')?.remove()}
+function cancelInteractiveMatch(){liveMatch=null;closeMatchModal();render()}
+function matchDecision(type){
+ if(!liveMatch)return;
+ let p=state.player,m=state.management||{},r=liveMatch.opp;
+ liveMatch.actions++;
+ liveMatch.minute=Math.min(90,liveMatch.minute+rand(20,32));
+ let strength=state.club.strength+(p.overall-65)*.25+(p.form-70)*.12+(p.fitness-70)*.06+(p.morale-70)*.04+(m.prep==='tactical'?4:0)+(m.chemistry||60)/100*2;
+ let oppStrength=r.strength+rand(-4,5);
+ if(type==='attack'){
+   liveMatch.attack+=3;
+   let chance=Math.min(.8,.30+(strength-oppStrength)/100+p.form/500);
+   if(Math.random()<chance){liveMatch.score++;liveMatch.goals++;liveMatch.events.push(`⚽ ${p.name} helped create a dangerous attacking move${Math.random()<.45?' — GOAL!':''}`);if(Math.random()<.4&&p.position!=='GK')liveMatch.assists++}
+   else liveMatch.events.push(`⚡ ${p.name} attacked the space but the chance was blocked.`);
+   p.energy=Math.max(0,p.energy-7);
+ } else if(type==='pass'){
+   liveMatch.attack+=2;liveMatch.events.push(`🎯 ${p.name} kept the ball moving and helped the team control the game.`);p.energy=Math.max(0,p.energy-4);
+   if(Math.random()<.22)liveMatch.assists++;
+ } else {
+   liveMatch.defend+=3;liveMatch.events.push(`🛡️ ${p.name} tracked back and helped shut down an attack.`);p.energy=Math.max(0,p.energy-3);
+ }
+ let oppChance=Math.max(.08,.22+(oppStrength-strength)/120);
+ if(Math.random()<oppChance){liveMatch.oppScore++;liveMatch.events.push(`🔴 ${r.short} found space and scored.`)}
+ closeMatchModal();
+ if(liveMatch.actions>=3){finishInteractiveMatch();return}
+ renderMatchModal();
+}
+function finishInteractiveMatch(){
+ let p=state.player,m=state.management||{},r=liveMatch.opp;
+ let teamScore=liveMatch.score,oppScore=liveMatch.oppScore;
+ let result=teamScore>oppScore?'win':teamScore===oppScore?'draw':'loss';
+ let decisionBoost=(liveMatch.attack*.12+liveMatch.defend*.08);
+ let rating=Math.max(5,Math.min(10,6.1+(teamScore-oppScore)*.5+liveMatch.goals*.85+liveMatch.assists*.35+decisionBoost+rand(-4,4)/10+(m.prep==='tactical'?.25:0)));
+ let mm={id:uid(),week:state.currentWeek,season:state.currentSeason,opponent:r.name,opponentId:r.id,home:liveMatch.home,teamScore,opponentScore:oppScore,goals:liveMatch.goals,assists:Math.min(liveMatch.assists,Math.max(0,teamScore)),rating:+rating.toFixed(1),competition:'League'};
+ mm.assists=Math.min(mm.assists,Math.max(0,teamScore));
+ state.matches.unshift(mm);
+ p.appearances++;p.careerAppearances++;p.goals+=mm.goals;p.assists+=mm.assists;p.careerGoals+=mm.goals;p.careerAssists+=mm.assists;
+ p.form=Math.max(40,Math.min(99,p.form+(rating>=7.5?3:rating<6?-2:0)));
+ p.morale=Math.max(35,Math.min(100,p.morale+(result==='win'?4:result==='draw'?0:-3)));
+ p.fitness=Math.max(25,p.fitness-rand(8,16));p.energy=Math.max(0,p.energy-rand(12,24));
+ state.season.goals+=mm.goals;state.season.assists+=mm.assists;state.season.appearances++;state.season.ratingTotal+=rating;
+ p.reputation+=result==='win'?2:mm.rating>=7.5?1:0;
+ state.balance+=p.weeklySalary;state.careerEarnings+=p.weeklySalary;
+ m.managerTrust=Math.max(0,Math.min(100,m.managerTrust+(rating>=7?2:rating<6?-2:0)));
+ m.clubConfidence=Math.max(0,Math.min(100,m.clubConfidence+(result==='win'?3:result==='loss'?-2:0)));
+ m.prep=null;m.weeklyPlan='balanced';state.currentWeek++;
+ if(state.currentWeek>38)endSeason();else randomEvent();
+ challengeProgress();updateRival();p.marketValue=market(p);save();
+ closeMatchModal();
+ playMusic(result==='win'?'victory':(r.id===state.rival?.clubId?'rival':'main'));
+ document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="matchResultModal"><div class="match-live">
+ <div class="mini">FULL TIME · ${esc(mm.competition)}</div><h2>${esc(state.club.name)} ${mm.teamScore} – ${mm.opponentScore} ${esc(r.name)}</h2>
+ <div class="match-result"><b>${result==='win'?'🏆 VICTORY':result==='draw'?'🤝 DRAW':'💪 DEFEAT'}</b><br><span class="mini">${mm.rating}/10 player rating · ${mm.goals} goal(s) · ${mm.assists} assist(s)</span></div>
+ <div class="grid g2" style="margin-top:12px"><div class="notice"><b>Performance</b><br>Form ${p.form} · Fitness ${p.fitness}<br>Manager trust ${m.managerTrust}</div><div class="notice"><b>Match Impact</b><br>Attacking decisions ${liveMatch.attack}<br>Defensive decisions ${liveMatch.defend}</div></div>
+ <button class="btn primary" style="width:100%;margin-top:12px" onclick="closeResultAndRender()">Continue Career</button>
+ </div></div>`);
+ liveMatch=null;
+}
+function closeResultAndRender(){document.getElementById('matchResultModal')?.remove();render()}
+function simulateMatch(){startInteractiveMatch()}
+
+function randomEvent(){if(Math.random()>.22)return;let p=state.player;let events=[['milestone','Coach praises your recent form.',()=>p.morale=Math.min(100,p.morale+5)],['rival','Your rival had a strong week. The media compares you.',()=>{state.rival.form=Math.min(99,state.rival.form+3)}],['injury','You picked up a minor knock in training. Fitness drops.',()=>p.fitness=Math.max(25,p.fitness-12)],['transfer','A scout has added you to a club shortlist.',()=>p.reputation+=2],['milestone','Your training impressed the coaching staff.',()=>p.morale=Math.min(100,p.morale+3)]];let e=choose(events);e[2]();addNotice(e[0],e[1])}
+function updateRival(){let r=state.rival;r.appearances+=1;r.goals+=Math.random()<(r.overall/100)*.3?1:0;r.assists+=Math.random()<.18?1:0;r.form=Math.max(50,Math.min(99,r.form+rand(-3,4)));r.overall=Math.min(r.potential,r.overall+(Math.random()<.12?1:0));r.marketValue=r.overall*100000*(r.age<23?1.4:.9)}
+function train(type){let p=state.player;if(p.energy<20){toast('Not enough energy.');return}let key=type,cap=p.potential;let gain=Math.random()<.72?1:0;p.energy-=20;p.fitness=Math.max(30,p.fitness-4);if(gain&&p.attrs[key]<cap){p.attrs[key]=Math.min(99,p.attrs[key]+1);p.overall=calcOverall(p);p.marketValue=market(p);p.morale=Math.min(100,p.morale+1);toast(`${type[0].toUpperCase()+type.slice(1)} improved +1`)}else toast('Training completed. Keep developing.');save();render()}
+function advanceWeek(){let p=state.player,m=state.management||{};if(!m.prep){toast('Choose a weekly management plan before advancing.');setView('management');return}p.energy=Math.min(100,p.energy+rand(8,15));p.fitness=Math.min(100,p.fitness+rand(5,12));p.morale=Math.max(30,Math.min(100,p.morale+rand(-1,2)));p.form=Math.max(45,Math.min(95,p.form+rand(-2,2)));state.balance+=p.weeklySalary;state.careerEarnings+=p.weeklySalary;if(Math.random()<.12)randomEvent();state.currentWeek++;m.prep=null;m.weeklyPlan='balanced';save();render()}
+
+function endSeason(){let p=state.player;let avg=state.season.appearances?state.season.ratingTotal/state.season.appearances:0;let trophy=Math.random()<(state.club.strength/120)?'League Title':null;if(trophy){p.trophies.push(`League Title S${state.currentSeason}`);state.seasonTrophies.push(trophy);addNotice('award',`Season ${state.currentSeason}: ${state.club.name} won the league!`)}if(p.season===undefined)p.season={};state.history.unshift({season:state.currentSeason,club:state.club.name,appearances:state.season.appearances,goals:state.season.goals,assists:state.season.assists,rating:+avg.toFixed(1),trophies:[...state.seasonTrophies]});if(p.goals>7&&Math.random()<.35){p.awards.push(`Player of the Season S${state.currentSeason}`);addNotice('award','You won Player of the Season!')}let rivalAhead=(state.rival.goals+state.rival.assists/2)>(p.goals+p.assists/2);if(!rivalAhead){let ch=state.challenges.find(x=>x.id==='rival');ch.progress=1;challengeProgress()}state.currentSeason++;state.currentWeek=1;p.age++;p.season={goals:0,assists:0,appearances:0,ratingTotal:0};state.season={goals:0,assists:0,appearances:0,ratingTotal:0};state.seasonTrophies=[];migrate(state);state.management.prep=null;state.management.objectives=makeObjectives();p.energy=100;p.fitness=100;p.form=Math.max(55,p.form);if(p.age>=36&&Math.random()<.2){toast('Your career is approaching its final years.')}save();render()}
+function transferOffer(){let p=state.player;let eligible=clubs.filter(c=>c.id!==state.club.id&&c.strength>=Math.max(60,p.overall-5));let c=choose(eligible);let salary=Math.max(800,Math.round((p.overall*35+c.reputation*8)/10)*10);return{club:c,salary,years:rand(2,5),fee:Math.round((p.marketValue||market(p))*(.8+Math.random()*.7))}}
+function doTransfer(o){state.club=o.club;state.player.clubId=o.club.id;state.player.weeklySalary=o.salary;state.player.contractYears=o.years;state.balance+=o.fee;addNotice('transfer',`Transfer completed: you joined ${o.club.name} for ${fmtMoney(o.fee)}.`);save();render()}
+function retire(){let p=state.player;p.isRetired=true;state.isRetired=true;state.retirementSummary={seasons:state.currentSeason,totalGoals:p.careerGoals,totalAssists:p.careerAssists,totalAppearances:p.careerAppearances,trophies:[...p.trophies],awards:[...p.awards],peakOverall:p.overall};save();render()}
+function startCreation(){view='creation';render()}
+function menu(){view='menu';render()}
+function clearCareer(){confirmClear=true;render()}
+function confirmDelete(){localStorage.removeItem(KEY);state=null;confirmClear=false;view='menu';render()}
+function setView(v){view=v;render()}
+function createFromForm(){let name=document.querySelector('#pname').value.trim();let nat=document.querySelector('#pnat').value;let pos=document.querySelector('#ppos').value;let foot=document.querySelector('#pfoot').value;if(!name){toast('Enter a player name.');return}state=newGame({name,nationality:nat,position:pos,foot});view='dashboard';save();render()}
+function dashboard(){let p=state.player,c=state.club,r=state.rival;return `<div class="grid g4"><div class="card"><div class="label">Overall</div><div class="stat green">${p.overall}</div><div class="mini">Potential ${p.potential}</div></div><div class="card"><div class="label">Age</div><div class="stat">${p.age}</div><div class="mini">Season ${state.currentSeason}</div></div><div class="card"><div class="label">Balance</div><div class="stat">${fmtMoney(state.balance)}</div><div class="mini">Salary ${fmtMoney(p.weeklySalary)}/week</div></div><div class="card"><div class="label">Market Value</div><div class="stat gold">${fmtMoney(market(p))}</div><div class="mini">Reputation ${p.reputation}</div></div></div><div class="grid g2 section"><div class="card"><div class="top"><div><h2>${esc(p.name)}</h2><div class="muted">${p.position} • ${p.nationality} • ${p.foot} foot</div></div><span class="pill">${c.short}</span></div><p><b>${c.name}</b> · ${c.league}<br><span class="muted">${c.stadium}</span></p><div class="grid g2"><div><div class="label">Form ${p.form}</div><div class="bar"><i style="width:${p.form}%"></i></div></div><div><div class="label">Fitness ${p.fitness}</div><div class="bar"><i style="width:${p.fitness}%"></i></div></div></div></div><div class="card"><div class="top"><div><h3>Next Match</h3><div class="muted">Week ${state.currentWeek} • League</div></div></div>${nextMatchHtml()}</div></div><div class="grid g2 section"><div class="card"><h3>Manager Mode</h3><p class="muted">Choose how to prepare this week before playing or advancing.</p><button class="btn primary" onclick="setView('management')">Manage This Week</button></div><div class="card"><h3>Career Pressure</h3><p>Manager trust: <b>${state.management?.managerTrust||50}</b> · Club confidence: <b>${state.management?.clubConfidence||55}</b></p><p class="mini">Your decisions affect form, fitness and match performance.</p></div></div><div class="grid g3 section"><div class="card"><div class="label">Season Goals</div><div class="stat">${state.season.goals}</div></div><div class="card"><div class="label">Career Goals</div><div class="stat">${p.careerGoals}</div></div><div class="card"><div class="label">Career Appearances</div><div class="stat">${p.careerAppearances}</div></div></div>`}
+function nextMatchHtml(){let opp=choose(clubs.filter(x=>x.id!==state.club.id));return `<div class="match"><div class="team"><b>${state.club.short}</b><div class="tag">${state.club.name}</div></div><div><div class="score">VS</div><div class="tag">Week ${state.currentWeek}</div></div><div class="team"><b>${opp.short}</b><div class="tag">${opp.name}</div></div></div><button class="btn primary" style="width:100%;margin-top:12px" onclick="simulateMatch()">Play Match</button>`}
+function creation(){return `<div class="hero"><div class="hero-card"><button class="back" onclick="menu()">← Back</button><div class="brand" style="margin-top:20px"><div class="logo">FC</div><div><b>NEW CAREER</b><div class="muted">Build your career from age 15</div></div></div><h2 style="margin-top:24px">Create your player</h2><div class="form"><div class="field"><label>Player name</label><input id="pname" maxlength="30" placeholder="Your footballer name"></div><div class="field"><label>Nationality</label><select id="pnat">${['Nigeria','England','Spain','Brazil','France','Germany','Italy','Portugal','Argentina','Netherlands','Belgium','Ghana','Morocco'].map(x=>`<option>${x}</option>`).join('')}</select></div><div class="grid g2"><div class="field"><label>Position</label><select id="ppos">${positions.map(x=>`<option>${x}</option>`).join('')}</select></div><div class="field"><label>Preferred foot</label><select id="pfoot"><option>Right</option><option>Left</option></select></div></div><div class="notice">You begin at age <b>15</b> as a prospect. Training, performances, transfers and trophies shape your career.</div><button class="btn primary" onclick="createFromForm()">Start Career</button></div></div></div>`}
+function ensurePro(){
+ if(!state.management) state.management={}; let m=state.management;
+ if(m.fanPopularity==null)m.fanPopularity=25;if(m.agent==null)m.agent={level:1,trust:50};
+ if(!m.endorsements)m.endorsements=[];if(!m.media)m.media={reputation:20,stories:0};
+ if(!m.leadership)m.leadership={captaincy:0,voice:50};if(!m.facilities)m.facilities={training:1,recovery:1,medical:1,scouting:1};
+ if(!m.lifestyle)m.lifestyle={health:75,focus:70};if(!m.matchPrep)m.matchPrep=null;
+ if(m.weeklyExpenses==null)m.weeklyExpenses=120;if(m.staff==null)m.staff={fitness:1,scout:1};
+}
+function proPage(){ensurePro();let m=state.management,p=state.player;let endCost=2500+m.endorsements.length*1500;return `<div class="grid g2">
+<div class="card"><h2>Media & Reputation</h2><p class="muted">Manage your public image without letting it distract from football.</p><div class="grid g2"><div><div class="label">Media reputation</div><div class="stat">${m.media.reputation}</div></div><div><div class="label">Fan popularity</div><div class="stat">${m.fanPopularity}</div></div></div><button class="btn primary" onclick="mediaInterview()">Give Interview</button><button class="btn" onclick="socialPost()">Post Career Update</button></div>
+<div class="card"><h2>Agent</h2><p class="muted">Your agent helps with contracts and opportunities.</p><div class="notice">Level ${m.agent.level} · Trust ${m.agent.trust}</div><button class="btn" onclick="meetAgent()">Meet Agent</button><button class="btn" onclick="agentNegotiation()">Ask Agent to Find Offers</button></div>
+</div><div class="grid g2 section">
+<div class="card"><h2>Endorsements</h2><p class="muted">Use your growing reputation to earn extra income.</p>${m.endorsements.length?m.endorsements.map(e=>`<div class="notice"><b>${esc(e.name)}</b><br><span class="mini">Weekly income ${fmtMoney(e.income)} · Popularity +${e.pop}</span></div>`).join(''):'<p class="mini">No active endorsement deals yet.</p>'}<button class="btn primary" onclick="signEndorsement()">Look for Deal · ${fmtMoney(endCost)}</button></div>
+<div class="card"><h2>Leadership</h2><div class="grid g2"><div><div class="label">Leadership</div><div class="stat">${m.leadership.voice}</div></div><div><div class="label">Captaincy</div><div class="stat">${m.leadership.captaincy}%</div></div></div><button class="btn" onclick="leadTeam()">Lead Team Session</button><button class="btn" onclick="askCaptaincy()">Ask About Captaincy</button></div>
+</div><div class="grid g2 section">
+<div class="card"><h2>Club Facilities</h2>${[['training','Training Centre'],['recovery','Recovery Centre'],['medical','Medical Team'],['scouting','Scouting Network']].map(x=>`<div class="notice"><div class="top"><b>${x[1]}</b><span>Lv ${m.facilities[x[0]]}</span></div><button class="btn" onclick="upgradeFacility('${x[0]}')">Upgrade · ${fmtMoney(1000*m.facilities[x[0]])}</button></div>`).join('')}</div>
+<div class="card"><h2>Lifestyle</h2><p class="muted">Balance career pressure with health and focus.</p><div class="grid g2"><div><div class="label">Health</div><div class="stat">${m.lifestyle.health}</div></div><div><div class="label">Focus</div><div class="stat">${m.lifestyle.focus}</div></div></div><button class="btn" onclick="lifestyleChoice('rest')">Rest & Recover</button><button class="btn" onclick="lifestyleChoice('focus')">Focus on Football</button><button class="btn" onclick="lifestyleChoice('social')">Social Time</button></div>
+</div><div class="card section"><h2>Matchday Preparation</h2><p class="muted">Choose your approach before the next match.</p>${[['safe','Play Safe','Lower risk, protect fitness'],['normal','Play Your Game','Balanced approach'],['hero','Be the Hero','Higher risk, higher reward']].map(x=>`<button class="btn ${m.matchPrep===x[0]?'primary':''}" onclick="matchPrep('${x[0]}')">${x[1]} <span class="mini">· ${x[2]}</span></button>`).join('')}</div>`}
+function mediaInterview(){ensurePro();let m=state.management;if(m.media.reputation>55){m.media.reputation=Math.min(100,m.media.reputation+3);m.fanPopularity=Math.min(100,m.fanPopularity+3);state.player.morale=Math.min(100,state.player.morale+2);toast('The interview went well. Fans loved your confidence.')}else{m.media.reputation=Math.min(100,m.media.reputation+2);m.fanPopularity=Math.min(100,m.fanPopularity+1);toast('You handled the interview professionally.')}m.media.stories++;addNotice('media','You completed a media interview.');save();render()}
+function socialPost(){ensurePro();let m=state.management;if(m.lifestyle.focus<45){toast('Your focus is too low for another media distraction.');return}m.fanPopularity=Math.min(100,m.fanPopularity+2);m.media.reputation=Math.min(100,m.media.reputation+1);m.lifestyle.focus=Math.max(0,m.lifestyle.focus-3);addNotice('media','Your career update increased fan engagement.');save();render()}
+function meetAgent(){ensurePro();let m=state.management;m.agent.trust=Math.min(100,m.agent.trust+4);m.agent.level=Math.min(5,m.agent.level+(m.agent.trust>80?1:0));m.lifestyle.focus=Math.max(0,m.lifestyle.focus-1);toast(`Agent meeting complete. Trust ${m.agent.trust}.`);save();render()}
+function agentNegotiation(){ensurePro();let m=state.management;if(m.agent.trust<40){toast('Your agent needs more trust before approaching major clubs.');return}let boost=Math.floor(m.agent.level*3);state.player.reputation+=boost;addNotice('transfer',`Your agent contacted clubs and raised your profile (+${boost} reputation).`);toast('Your agent is contacting clubs.');save();render()}
+function signEndorsement(){ensurePro();let m=state.management,cost=2500+m.endorsements.length*1500;if(state.balance<cost){toast('You need more money to secure this deal.');return}if(m.fanPopularity<35){toast('Build more popularity before seeking endorsements.');return}let names=['Velocity Boots','ProFuel Sports','GoalRush','NextGen Football','Elite Performance'];let e={name:choose(names),income:rand(150,500),pop:rand(2,5)};state.balance-=cost;m.endorsements.push(e);m.fanPopularity=Math.min(100,m.fanPopularity+e.pop);state.player.reputation+=2;toast(`Signed endorsement: ${e.name}`);save();render()}
+function leadTeam(){ensurePro();let m=state.management;m.leadership.voice=Math.min(100,m.leadership.voice+5);m.chemistry=Math.min(100,(m.chemistry||60)+3);state.player.morale=Math.min(100,state.player.morale+3);addNotice('leadership','You led a team session and improved chemistry.');save();render()}
+function askCaptaincy(){ensurePro();let m=state.management;if(state.player.overall<75||m.managerTrust<75||m.leadership.voice<65){toast('You need higher overall, manager trust and leadership to challenge for captaincy.');return}m.leadership.captaincy=Math.min(100,m.leadership.captaincy+10);m.managerTrust=Math.min(100,m.managerTrust+2);toast('The manager is considering you for a leadership role.');save();render()}
+function upgradeFacility(type){ensurePro();let m=state.management,cost=1000*m.facilities[type];if(m.facilities[type]>=5){toast('This facility is already maxed.');return}if(state.balance<cost){toast('Not enough money.');return}state.balance-=cost;m.facilities[type]++;if(type==='training')state.player.potential=Math.min(99,state.player.potential+1);if(type==='recovery')state.player.fitness=Math.min(100,state.player.fitness+5);if(type==='medical')state.player.morale=Math.min(100,state.player.morale+2);toast(`${type} facility upgraded to level ${m.facilities[type]}.`);save();render()}
+function lifestyleChoice(x){ensurePro();let m=state.management;if(x==='rest'){m.lifestyle.health=Math.min(100,m.lifestyle.health+8);state.player.fitness=Math.min(100,state.player.fitness+6);m.lifestyle.focus=Math.max(0,m.lifestyle.focus-1)}else if(x==='focus'){m.lifestyle.focus=Math.min(100,m.lifestyle.focus+8);state.player.form=Math.min(99,state.player.form+3);m.lifestyle.health=Math.max(30,m.lifestyle.health-2)}else{m.lifestyle.health=Math.min(100,m.lifestyle.health+2);state.player.morale=Math.min(100,state.player.morale+5);m.lifestyle.focus=Math.max(0,m.lifestyle.focus-3)}save();render()}
+function matchPrep(x){ensurePro();state.management.matchPrep=x;toast('Matchday approach selected.');save();render()}
+const oldSimV4=simulateMatch;simulateMatch=function(){ensurePro();let m=state.management,p=state.player;if(m.matchPrep==='safe'){p.fitness=Math.min(100,p.fitness+3);p.form=Math.min(99,p.form+1)}else if(m.matchPrep==='hero'){p.energy=Math.max(0,p.energy-6);p.form=Math.min(99,p.form+3)}oldSimV4();m.matchPrep=null;if(state.matches[0]){let last=state.matches[0];if(last.rating>=8)m.fanPopularity=Math.min(100,m.fanPopularity+3);if(last.rating<6)m.fanPopularity=Math.max(0,m.fanPopularity-1);if(last.goals>0)m.media.reputation=Math.min(100,m.media.reputation+2)}save();render()};
+const oldAdvV4=advanceWeekManagement;advanceWeekManagement=function(){ensurePro();oldAdvV4();if(state){let m=state.management;let endorse=m.endorsements.reduce((a,e)=>a+e.income,0);state.balance+=endorse;m.lifestyle.health=Math.max(20,Math.min(100,m.lifestyle.health+rand(-2,2)));m.lifestyle.focus=Math.max(20,Math.min(100,m.lifestyle.focus+rand(-2,2)));m.leadership.captaincy=Math.min(100,m.leadership.captaincy+(m.managerTrust>80?1:0));save();}};
+const oldEnsureDeep=ensureDeepManagement;ensureDeepManagement=function(){oldEnsureDeep();ensurePro()};
+
+function nav(){return `<div class="nav">${[['dashboard','Dashboard'],['management','Manage Week'],['training','Training'],['matches','Matches'],['club','Club'],['transfer','Transfers'],['rival','Rival'],['challenges','Challenges'],['profile','Profile']].map(([id,n])=>`<button class="${view===id?'active':''}" onclick="setView('${id}')">${n}</button>`).join('')}</div>`}
+function training(){return `<div class="card"><h2>Training</h2><p class="muted">20 energy per session. Development slows as attributes approach your potential.</p><div class="grid g3">${['pace','shooting','passing','dribbling','defending','physical'].map(k=>`<div class="card"><div class="label">${k}</div><div class="stat">${state.player.attrs[k]}</div><div class="bar"><i style="width:${state.player.attrs[k]}%"></i></div><button class="btn" style="width:100%;margin-top:12px" onclick="train('${k}')">Train</button></div>`).join('')}</div><div class="notice" style="margin-top:14px">Energy: <b>${state.player.energy}</b> · Fitness: <b>${state.player.fitness}</b> · Potential: <b>${state.player.potential}</b></div><button class="btn primary" onclick="advanceWeek()">Advance Week</button></div>`}
+function matches(){return `<div class="grid g2"><div class="card"><h2>Match Center</h2><p class="mini">Make 3 decisions during every match. Your choices affect the result and rating.</p>${state.matches.slice(0,8).map(m=>`<div class="notice"><b>${state.club.short} ${m.teamScore}–${m.opponentScore} ${club(m.opponentId).short}</b><br><span class="mini">S${m.season} W${m.week} · ${m.competition} · ${m.goals} goal(s), ${m.assists} assist(s) · ${m.rating}/10</span></div>`).join('')||'<div class="empty">No matches played yet.</div>'}</div><div class="card"><h2>Season Stats</h2><div class="grid g2"><div><div class="label">Appearances</div><div class="stat">${state.season.appearances}</div></div><div><div class="label">Goals</div><div class="stat">${state.season.goals}</div></div><div><div class="label">Assists</div><div class="stat">${state.season.assists}</div></div><div><div class="label">Avg rating</div><div class="stat">${state.season.appearances?(state.season.ratingTotal/state.season.appearances).toFixed(1):'—'}</div></div></div><button class="btn primary" style="width:100%;margin-top:15px" onclick="simulateMatch()">Play Next Match</button></div></div>`}
+function clubPage(){return `<div class="grid g2"><div class="card"><h2>${state.club.name}</h2><p class="muted">${state.club.league} · ${state.club.country}</p><div class="grid g3"><div><div class="label">Strength</div><div class="stat">${state.club.strength}</div></div><div><div class="label">Reputation</div><div class="stat">${state.club.reputation}</div></div><div><div class="label">Stadium</div><div class="mini">${state.club.stadium}</div></div></div></div><div class="card"><h2>Contract</h2><div class="grid g2"><div><div class="label">Salary</div><div class="stat">${fmtMoney(state.player.weeklySalary)}</div></div><div><div class="label">Years</div><div class="stat">${state.player.contractYears}</div></div></div><p class="muted">Squad status: ${state.player.overall>=state.club.strength-5?'First Team':'Prospect'}</p></div></div>`}
+function transfer(){let o=transferOffer();return `<div class="grid g2"><div class="card"><h2>Transfer Market</h2><p class="muted">Offers are generated from your current level, reputation and market value.</p><div class="notice"><b>${o.club.name}</b><br>${o.club.league} · Strength ${o.club.strength}<br><span class="green">${fmtMoney(o.salary)}/week</span> · ${o.years}-year deal<br><span class="gold">Transfer value ${fmtMoney(o.fee)}</span></div><button class="btn primary" onclick="doTransfer(${JSON.stringify(o).replace(/"/g,'&quot;')})">Accept Offer</button> <button class="btn" onclick="render()">Generate Another</button></div><div class="card"><h2>Current Club</h2><p><b>${state.club.name}</b></p><p class="muted">Market value ${fmtMoney(market(state.player))}</p><p>Career earnings: <b>${fmtMoney(state.careerEarnings)}</b></p></div></div>`}
+function rival(){let r=state.rival;let rc=club(r.clubId);return `<div class="grid g2"><div class="card"><h2>Career Rival</h2><p class="muted">Your careers will evolve side by side.</p><div class="grid g2"><div class="notice"><h3>${esc(state.player.name)}</h3><b>${state.player.overall}</b> OVR<br>${state.player.careerGoals} goals<br>${state.player.careerAssists} assists<br>${state.player.trophies.length} trophies</div><div class="notice"><h3>${esc(r.name)}</h3><b>${r.overall}</b> OVR<br>${r.goals} goals<br>${r.assists} assists<br>${r.trophies} trophies</div></div></div><div class="card"><h2>${esc(r.name)}</h2><p>${rc.name} · ${r.position}</p><div class="grid g2"><div><div class="label">Form</div><div class="stat">${r.form}</div></div><div><div class="label">Potential</div><div class="stat">${r.potential}</div></div><div><div class="label">Appearances</div><div class="stat">${r.appearances}</div></div><div><div class="label">Market value</div><div class="stat">${fmtMoney(r.marketValue||r.overall*100000)}</div></div></div></div></div>`}
+function challenges(){return `<div class="grid g2">${state.challenges.map(c=>`<div class="card"><div class="challenge"><div><h3>${c.name} ${c.completed?'✓':''}</h3><div class="mini">${c.description}</div></div><span class="pill">${c.completed?'Completed':c.progress+'/'+c.target}</span></div><div class="bar"><i style="width:${Math.min(100,c.progress/c.target*100)}%"></i></div><p class="mini" style="margin-top:8px">Reward: ${c.reward}</p></div>`).join('')}</div>`}
+function profile(){let p=state.player;return `<div class="grid g2"><div class="card"><h2>${esc(p.name)}</h2><p class="muted">${p.age} · ${p.position} · ${p.nationality}</p><div class="grid g3"><div><div class="label">Overall</div><div class="stat green">${p.overall}</div></div><div><div class="label">Potential</div><div class="stat">${p.potential}</div></div><div><div class="label">Value</div><div class="stat gold">${fmtMoney(market(p))}</div></div></div><h3 style="margin-top:20px">Attributes</h3>${Object.entries(p.attrs).map(([k,v])=>`<div style="margin:9px 0"><div class="label">${k} <b style="float:right;color:#fff">${v}</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`).join('')}</div><div class="card"><h2>Career History</h2>${state.history.map(h=>`<div class="notice"><b>Season ${h.season} · ${h.club}</b><br><span class="mini">${h.appearances} apps · ${h.goals} goals · ${h.assists} assists · ${h.rating} rating</span></div>`).join('')||'<div class="empty">Your career history will appear here.</div>'}<h3>Trophies</h3><p>${p.trophies.map(x=>`<span class="pill" style="margin:3px">🏆 ${esc(x)}</span>`).join('')||'<span class="muted">None yet.</span>'}</p><h3>Awards</h3><p>${p.awards.map(x=>`<span class="pill" style="margin:3px">⭐ ${esc(x)}</span>`).join('')||'<span class="muted">None yet.</span>'}</p></div></div>`}
+function retired(){let s=state.retirementSummary||{};return `<div class="hero"><div class="hero-card"><div class="brand"><div class="logo">🏆</div><div><b>CAREER COMPLETE</b><div class="muted">${esc(state.player.name)}</div></div></div><h2 style="margin-top:22px">Your Football Legacy</h2><div class="grid g3"><div class="card"><div class="label">Seasons</div><div class="stat">${s.seasons||0}</div></div><div class="card"><div class="label">Goals</div><div class="stat">${s.totalGoals||0}</div></div><div class="card"><div class="label">Appearances</div><div class="stat">${s.totalAppearances||0}</div></div></div><p class="muted">Trophies: ${(s.trophies||[]).length} · Awards: ${(s.awards||[]).length} · Peak overall: ${s.peakOverall||state.player.overall}</p><button class="btn primary" onclick="newCareerFromRetire()">Start New Career</button> <button class="btn" onclick="menu()">Main Menu</button></div></div>`}
+function newCareerFromRetire(){localStorage.removeItem(KEY);state=null;view='creation';render()}
+function app(){if(view==='menu')return menuHtml();if(view==='creation')return creation();if(!state)return menuHtml();if(state.isRetired)return retired();return `<div class="wrap"><div class="top"><div class="brand"><div class="logo">FC</div><div><b>FOOTBALL CAREER SIMULATOR</b><div class="muted">S${state.currentSeason} · Week ${state.currentWeek}</div></div></div><div class="top-actions"><button class="btn" onclick="setView('profile')">${esc(state.player.name)}</button><button class="btn" onclick="menu()">Menu</button><button class="btn danger" onclick="retire()">Retire</button></div></div>${nav()}<div class="section">${view==='dashboard'?dashboard():view==='management'?management():view==='training'?training():view==='matches'?matches():view==='club'?clubPage():view==='transfer'?transfer():view==='rival'?rival():view==='challenges'?challenges():profile()}</div><div class="card" style="margin-top:14px"><div class="top"><div><b>Career Controls</b><div class="mini">Autosaved locally in this browser</div></div><button class="btn primary" onclick="advanceWeek()">Advance Week</button></div></div></div>`}
+function menuHtml(){let has=!!localStorage.getItem(KEY);return `<div class="hero"><div class="hero-card"><div class="brand"><div class="logo">FC</div><div><b>FOOTBALL CAREER SIMULATOR</b><div class="muted">Local single-player edition</div></div></div><h1>Build your football legacy.</h1><p class="sub">Start at 15, train, play matches, develop your attributes, face a career rival, chase challenges, earn transfers and eventually retire as a legend.</p><div class="actions"><button class="btn primary" onclick="startCreation()">New Career</button><button class="btn" ${has?'':'disabled'} onclick="continueCareer()">Continue Career</button><button class="btn" onclick="settings()">Settings</button>${has?'<button class="btn danger" onclick="clearCareer()">Clear Save</button>':''}</div><p class="mini" style="margin-top:18px">No account • No server • No API • Your save stays in this browser.</p></div></div>`}
+function continueCareer(){if(load()){view='dashboard';render()}else toast('No valid career save found.')}
+function settings(){let s=state?.settings||{sound:true,music:true,animations:true};document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="settingsModal"><div><h2>Settings</h2><label class="notice"><input type="checkbox" ${s.sound?'checked':''} onchange="toggleSetting('sound',this.checked)"> Sound effects</label><label class="notice"><input type="checkbox" ${s.music?'checked':''} onchange="toggleSetting('music',this.checked)"> Music</label><label class="notice"><input type="checkbox" ${s.animations?'checked':''} onchange="toggleSetting('animations',this.checked)"> Animations</label><button class="btn primary" style="width:100%" onclick="document.querySelector('#settingsModal').remove()">Done</button></div></div>`)}
+function toggleSetting(k,v){if(state){state.settings[k]=v;save()}}
+function render(){document.getElementById('app').innerHTML=app();if(confirmClear)document.getElementById('app').insertAdjacentHTML('beforeend',`<div class="modal"><div><h2>Clear career?</h2><p class="muted">This permanently removes the local save from this browser.</p><button class="btn danger" onclick="confirmDelete()">Clear Save</button> <button class="btn" onclick="confirmClear=false;render()">Cancel</button></div></div>`)}
+
+/* MANAGEMENT EXPANSION */
+function ensureManagement(){
+ let m=state.management||(state.management={});
+ m.clubObjective=m.clubObjective||{type:'goals',target:8,progress:0,reward:2500,done:false};
+ m.role=m.role||'Prospect'; m.chemistry=m.chemistry??50; m.managerTrust=m.managerTrust??50; m.clubConfidence=m.clubConfidence??55;
+ m.contractTalks=m.contractTalks??0; m.lastContractSeason=m.lastContractSeason??0;
+ m.weeklyExpenses=m.weeklyExpenses??100; m.seasonIncome=m.seasonIncome??0;
+ return m;
+}
+function squadRole(){let p=state.player,m=ensureManagement(), score=p.overall + m.managerTrust*.12 + p.form*.08 + p.fitness*.05;
+ if(score>=95)return 'Star Player'; if(score>=87)return 'Key Player'; if(score>=78)return 'First Team'; if(score>=70)return 'Rotation'; if(score>=62)return 'Substitute'; return 'Prospect';}
+function roleColor(r){return ['Star Player','Key Player','First Team'].includes(r)?'green':r==='Rotation'?'gold':'muted'}
+function setClubObjective(type){let m=ensureManagement();let opts={goals:[8,'Score 8 goals this season'],assists:[6,'Create 6 assists this season'],apps:[18,'Make 18 appearances this season'],rating:[7.2,'Finish with a 7.2 average rating']};let o=opts[type]||opts.goals;m.clubObjective={type,target:o[0],progress:0,reward:3000,done:false};addNotice('club',`New club objective: ${o[1]}`);save();render()}
+function objectiveProgress(){let m=ensureManagement(),s=state.season,o=m.clubObjective||{};o.progress=o.type==='goals'?s.goals:o.type==='assists'?s.assists:o.type==='apps'?s.appearances:(s.appearances?s.ratingTotal/s.appearances:0);if(o.progress>=o.target&&!o.done){o.done=true;state.balance+=o.reward;m.clubConfidence=Math.min(100,m.clubConfidence+8);m.managerTrust=Math.min(100,m.managerTrust+5);state.player.reputation+=3;addNotice('club',`Club objective completed! +${fmtMoney(o.reward)}.`);toast('Club objective completed!')}}
+function negotiateContract(){let p=state.player,m=ensureManagement();if(m.contractTalks>=2&&m.lastContractSeason===state.currentSeason){toast('The club is not ready for another negotiation.');return}let demand=Math.max(p.weeklySalary+200,Math.round((p.overall*45+m.managerTrust*10)/10)*10);let chance=Math.min(92,45+m.managerTrust*.35+p.form*.2+(p.overall-state.club.strength)*1.5);m.contractTalks++;m.lastContractSeason=state.currentSeason;if(Math.random()*100<chance){p.weeklySalary=demand;p.contractYears=Math.max(2,p.contractYears);m.managerTrust=Math.min(100,m.managerTrust+3);addNotice('contract',`Contract improved to ${fmtMoney(demand)}/week.`);toast('Contract renewed successfully!')}else{m.managerTrust=Math.max(0,m.managerTrust-3);addNotice('contract','Contract talks stalled.');toast('The club rejected the first proposal.')}save();render()}
+function requestPlayingTime(){let m=ensureManagement(),p=state.player,role=squadRole();if(role==='Prospect'||role==='Substitute'){m.managerTrust=Math.min(100,m.managerTrust+4);m.clubConfidence=Math.min(100,m.clubConfidence+2);p.morale=Math.min(100,p.morale+4);addNotice('club','You asked for more playing time. The manager wants to see more consistency.')}else{m.managerTrust=Math.min(100,m.managerTrust+2);p.morale=Math.min(100,p.morale+2);addNotice('club','You spoke with the manager about your role.')}save();render()}
+function teamChemistry(){let m=ensureManagement();m.chemistry=Math.min(100,m.chemistry+8);state.player.morale=Math.min(100,state.player.morale+3);m.managerTrust=Math.min(100,m.managerTrust+2);addNotice('team','Team chemistry session improved squad cohesion.');save();render()}
+function clubFinances(){let m=ensureManagement();return `<div class="card"><h2>Club Finance</h2><div class="grid g3"><div><div class="label">Your balance</div><div class="stat gold">${fmtMoney(state.balance)}</div></div><div><div class="label">Weekly salary</div><div class="stat">${fmtMoney(state.player.weeklySalary)}</div></div><div><div class="label">Weekly personal costs</div><div class="stat">${fmtMoney(m.weeklyExpenses)}</div></div></div><p class="mini">Your salary is paid each week. Personal costs are deducted when the week advances.</p></div>`}
+function management(){ensureManagement();objectiveProgress();let p=state.player,m=state.management,role=squadRole(),o=m.clubObjective;return `<div class="grid g2"><div class="card"><h2>Weekly Management</h2><p class="muted">Your decisions shape fitness, form, trust and match performance.</p><div class="grid g2">${[['intensive','Intensive Training','+development · -fitness'],['tactical','Tactical Preparation','+match performance · +trust'],['recovery','Recovery Week','+fitness · +morale'],['individual','Individual Focus','+development · -energy'],['team','Team Chemistry','+morale · +chemistry']].map(x=>`<button class="card decision ${m.prep===x[0]?'selected':''}" onclick="choosePlan('${x[0]}')"><b>${x[1]}</b><span class="mini">${x[2]}</span></button>`).join('')}</div><div class="notice" style="margin-top:14px"><b>Role: ${role}</b><br>Manager trust: ${m.managerTrust} · Club confidence: ${m.clubConfidence} · Chemistry: ${m.chemistry}</div></div><div class="card"><h2>Club Objective</h2><p class="muted">The manager has expectations for your season.</p><div class="notice"><b>${o.type==='goals'?'Score Goals':o.type==='assists'?'Create Assists':o.type==='apps'?'Make Appearances':'Maintain Rating'}</b><br><span class="mini">${o.progress.toFixed?o.progress.toFixed(1):o.progress}/${o.target}</span><div class="bar"><i style="width:${Math.min(100,o.progress/o.target*100)}%"></i></div><span class="mini">Reward: ${fmtMoney(o.reward)}</span></div><div class="grid g2"><button class="btn" onclick="setClubObjective('goals')">Goal Target</button><button class="btn" onclick="setClubObjective('assists')">Assist Target</button><button class="btn" onclick="setClubObjective('apps')">Appearance Target</button><button class="btn" onclick="setClubObjective('rating')">Rating Target</button></div></div></div><div class="grid g3 section"><div class="card"><div class="label">Manager Trust</div><div class="stat">${m.managerTrust}</div><button class="btn" style="margin-top:10px;width:100%" onclick="requestPlayingTime()">Discuss Role</button></div><div class="card"><div class="label">Squad Role</div><div class="stat ${roleColor(role)}">${role}</div><div class="mini">Changes with performance and trust.</div></div><div class="card"><div class="label">Team Chemistry</div><div class="stat">${m.chemistry}</div><button class="btn" style="margin-top:10px;width:100%" onclick="teamChemistry()">Team Session</button></div></div>${clubFinances()}<div class="card section"><h2>Contract Management</h2><p class="muted">Current salary ${fmtMoney(p.weeklySalary)}/week · ${p.contractYears} year(s) remaining.</p><button class="btn primary" onclick="negotiateContract()">Negotiate Contract</button></div>`}
+function clubPage(){ensureManagement();let p=state.player,m=state.management,role=squadRole();return `<div class="grid g2"><div class="card"><h2>${state.club.name}</h2><p class="muted">${state.club.league} · ${state.club.country}</p><div class="grid g3"><div><div class="label">Strength</div><div class="stat">${state.club.strength}</div></div><div><div class="label">Reputation</div><div class="stat">${state.club.reputation}</div></div><div><div class="label">Stadium</div><div class="mini">${state.club.stadium}</div></div></div><h3 style="margin-top:18px">Your Role</h3><div class="notice"><b>${role}</b><br><span class="mini">Manager trust ${m.managerTrust} · Club confidence ${m.clubConfidence}</span></div></div><div class="card"><h2>Contract</h2><div class="grid g2"><div><div class="label">Salary</div><div class="stat">${fmtMoney(p.weeklySalary)}</div></div><div><div class="label">Years</div><div class="stat">${p.contractYears}</div></div></div><button class="btn primary" style="margin-top:12px" onclick="negotiateContract()">Negotiate Contract</button><button class="btn" style="margin-top:12px;margin-left:7px" onclick="requestPlayingTime()">Discuss Playing Time</button></div></div><div class="grid g3 section"><div class="card"><div class="label">Manager Trust</div><div class="stat">${m.managerTrust}</div></div><div class="card"><div class="label">Club Confidence</div><div class="stat">${m.clubConfidence}</div></div><div class="card"><div class="label">Team Chemistry</div><div class="stat">${m.chemistry}</div></div></div>${clubFinances()}`}
+function dashboard(){ensureManagement();objectiveProgress();let p=state.player,c=state.club,r=state.rival,m=state.management;return `<div class="grid g4"><div class="card"><div class="label">Overall</div><div class="stat green">${p.overall}</div><div class="mini">Potential ${p.potential}</div></div><div class="card"><div class="label">Squad Role</div><div class="stat">${squadRole()}</div><div class="mini">Trust ${m.managerTrust}</div></div><div class="card"><div class="label">Balance</div><div class="stat">${fmtMoney(state.balance)}</div><div class="mini">${fmtMoney(p.weeklySalary)}/week</div></div><div class="card"><div class="label">Market Value</div><div class="stat gold">${fmtMoney(market(p))}</div><div class="mini">Reputation ${p.reputation}</div></div></div><div class="grid g2 section"><div class="card"><div class="top"><div><h2>${esc(p.name)}</h2><div class="muted">${p.position} • ${p.nationality} • ${p.foot} foot</div></div><span class="pill">${c.short}</span></div><p><b>${c.name}</b> · ${c.league}<br><span class="muted">${c.stadium}</span></p><div class="grid g2"><div><div class="label">Form ${p.form}</div><div class="bar"><i style="width:${p.form}%"></i></div></div><div><div class="label">Fitness ${p.fitness}</div><div class="bar"><i style="width:${p.fitness}%"></i></div></div></div></div><div class="card"><h3>Next Match</h3>${nextMatchHtml()}</div></div><div class="grid g2 section"><div class="card"><h3>This Week</h3><p class="muted">Choose a plan, then play or advance.</p><button class="btn primary" onclick="setView('management')">Open Management</button></div><div class="card"><h3>Season Objective</h3><p><b>${m.clubObjective.progress.toFixed?m.clubObjective.progress.toFixed(1):m.clubObjective.progress}/${m.clubObjective.target}</b> progress</p><p class="mini">Manager trust ${m.managerTrust} · Chemistry ${m.chemistry}</p></div></div><div class="grid g4 section"><div class="card"><div class="label">Goals</div><div class="stat">${state.season.goals}</div></div><div class="card"><div class="label">Assists</div><div class="stat">${state.season.assists}</div></div><div class="card"><div class="label">Rival Goals</div><div class="stat">${r.goals}</div></div><div class="card"><div class="label">Career Apps</div><div class="stat">${p.careerAppearances}</div></div></div>`}
+function advanceWeekManagement(){ensureManagement();let p=state.player,m=state.management;objectiveProgress();if(!m.prep){toast('Choose a weekly management plan before advancing.');setView('management');return}p.energy=Math.min(100,p.energy+rand(8,15));p.fitness=Math.min(100,p.fitness+rand(5,12));p.morale=Math.max(30,Math.min(100,p.morale+rand(-1,2)));p.form=Math.max(45,Math.min(95,p.form+rand(-2,2)));state.balance+=p.weeklySalary-m.weeklyExpenses;state.careerEarnings+=p.weeklySalary;m.seasonIncome+=p.weeklySalary;if(Math.random()<.12)randomEvent();state.currentWeek++;m.prep=null;m.weeklyPlan='balanced';if(state.currentWeek>20)endSeason();save();render()}
+function nav(){return `<div class="nav">${[['dashboard','Dashboard'],['management','Manage Week'],['training','Training'],['matches','Matches'],['club','Club'],['transfer','Transfers'],['rival','Rival'],['challenges','Challenges'],['profile','Profile']].map(([id,n])=>`<button class="${view===id?'active':''}" onclick="setView('${id}')">${n}</button>`).join('')}</div>`}
+
+
+/* FINAL MANAGEMENT EXPANSION */
+function ensureDeepManagement(){
+ let m=state.management||(state.management={});
+ m.tactic=m.tactic||'Balanced'; m.teamMorale=m.teamMorale??70; m.fanPopularity=m.fanPopularity??35; m.sponsorIncome=m.sponsorIncome??0;
+ m.scouting=m.scouting||[]; m.inbox=m.inbox||[]; m.teammates=m.teammates||makeTeammates();
+ m.lineupCompetition=m.lineupCompetition??45; m.cleanSheets=m.cleanSheets??0; m.seasonWins=m.seasonWins??0;
+ m.transferBudget=m.transferBudget??500000; m.staff=m.staff||{coach:1,fitness:1,scout:1};
+ return m;
+}
+function makeTeammates(){
+ const names=['Samuel Okoro','Daniel Mensah','Ibrahim Bello','Michael Adeyemi','Tunde Adebayo','Victor James','Emeka Nwosu','Yusuf Musa','Chinedu Obi','David Cole'];
+ return names.map((n,i)=>({id:'tm'+i,name:n,position:choose(positions),overall:rand(55,74),morale:rand(60,85),chemistry:rand(55,80),starter:i<5}));
+}
+function teamRoleScore(){let m=ensureDeepManagement(),p=state.player;return Math.round(p.overall*.62+p.form*.18+p.fitness*.1+m.managerTrust*.1)}
+function chooseTactic(t){ensureDeepManagement();let effects={Balanced:[0,0,0],Attacking:[5,-4,3],Defensive:[-3,6,1],Counter:[3,3,0],Possession:[1,2,4]};state.management.tactic=t;let e=effects[t]||effects.Balanced;state.management.tacticEffects=e;addNotice('tactics',`Tactic changed to ${t}.`);save();render()}
+function squadPage(){ensureDeepManagement();let m=state.management,p=state.player,role=squadRole();return `<div class="grid g2"><div class="card"><h2>Squad Management</h2><p class="muted">Compete for your place and build chemistry with teammates.</p><div class="notice"><b>Your squad role: ${role}</b><br>Selection score: ${teamRoleScore()} · Chemistry: ${m.chemistry}</div>${m.teammates.map(t=>`<div class="notice"><div class="top"><b>${esc(t.name)}</b><span class="pill">${t.position}</span></div><span class="mini">OVR ${t.overall} · Morale ${t.morale} · Chemistry ${t.chemistry}</span></div>`).join('')}</div><div class="card"><h2>Team Tactics</h2><p class="muted">Choose how the team approaches matches.</p>${['Balanced','Attacking','Defensive','Counter','Possession'].map(t=>`<button class="btn ${m.tactic===t?'primary':''}" style="width:100%;margin:5px 0" onclick="chooseTactic('${t}')">${t}</button>`).join('')}<div class="notice" style="margin-top:12px">Current tactic: <b>${m.tactic}</b><br><span class="mini">Your tactical choice changes match risk and performance.</span></div></div></div>`}
+function financePage(){ensureDeepManagement();let m=state.management,p=state.player;let net=p.weeklySalary-m.weeklyExpenses;return `<div class="grid g3"><div class="card"><div class="label">Balance</div><div class="stat gold">${fmtMoney(state.balance)}</div></div><div class="card"><div class="label">Weekly income</div><div class="stat">${fmtMoney(p.weeklySalary)}</div></div><div class="card"><div class="label">Weekly costs</div><div class="stat">${fmtMoney(m.weeklyExpenses)}</div></div></div><div class="grid g2 section"><div class="card"><h2>Personal Finance</h2><p class="muted">Your career earnings are affected by salary, contracts and expenses.</p><div class="notice">Net weekly change: <b>${fmtMoney(net)}</b></div><button class="btn" onclick="upgradeStaff('fitness')">Hire Fitness Coach · €500</button><button class="btn" onclick="upgradeStaff('scout')">Hire Scout · €750</button></div><div class="card"><h2>Career Reputation</h2><div class="grid g2"><div><div class="label">Reputation</div><div class="stat">${p.reputation}</div></div><div><div class="label">Fan Popularity</div><div class="stat">${m.fanPopularity}</div></div></div><p class="mini">Strong performances and major transfers increase your popularity.</p></div></div>`}
+function upgradeStaff(type){ensureDeepManagement();let m=state.management,cost=type==='fitness'?500:750;if(state.balance<cost){toast('Not enough money.');return}if(m.staff[type]>=3){toast('This staff upgrade is already maxed.');return}state.balance-=cost;m.staff[type]++;if(type==='fitness')state.player.fitness=Math.min(100,state.player.fitness+5);else state.player.reputation+=2;addNotice('club',`Staff upgrade purchased: ${type}.`);save();render()}
+function inboxPage(){ensureDeepManagement();let m=state.management;if(!m.inbox.length)m.inbox=[{id:uid(),title:'Welcome to the club',body:'Your manager expects you to work hard and earn your place.',week:1},{id:uid(),title:'Career objective',body:'Build your reputation through performances and consistency.',week:1}];return `<div class="card"><h2>Career Inbox</h2><p class="muted">Important messages from your career world.</p>${m.inbox.slice().reverse().map(x=>`<div class="notice"><b>${esc(x.title)}</b><br><span class="mini">Week ${x.week}</span><p>${esc(x.body)}</p></div>`).join('')}</div>`}
+function seasonPage(){ensureDeepManagement();let p=state.player,r=state.rival,s=state.season;let avg=s.appearances?(s.ratingTotal/s.appearances).toFixed(1):'—';return `<div class="grid g2"><div class="card"><h2>Season Overview</h2><div class="grid g2"><div><div class="label">Season</div><div class="stat">${state.currentSeason}</div></div><div><div class="label">Week</div><div class="stat">${state.currentWeek}</div></div><div><div class="label">Goals</div><div class="stat">${s.goals}</div></div><div><div class="label">Assists</div><div class="stat">${s.assists}</div></div><div><div class="label">Appearances</div><div class="stat">${s.appearances}</div></div><div><div class="label">Average</div><div class="stat">${avg}</div></div></div></div><div class="card"><h2>Rival Race</h2><p>${esc(p.name)}: <b>${p.careerGoals}</b> career goals</p><p>${esc(r.name)}: <b>${r.goals}</b> rival goals</p><div class="notice">${p.careerGoals>=r.goals?'You are ahead of your rival.':'Your rival is currently ahead.'}</div></div></div>`}
+function scoutPlayer(){ensureDeepManagement();let m=state.management;let pool=clubs.filter(c=>c.id!==state.club.id);let c=choose(pool);let target={id:uid(),name:choose(['Lucas Ferreira','Owen Brooks','Karim Diallo','Mateo Ruiz','Femi Lawal','Thiago Costa']),position:choose(positions),overall:rand(Math.max(55,state.player.overall-12),Math.min(88,state.player.overall+6)),club:c.name,value:rand(500000,15000000)};m.scouting.unshift(target);m.scouting=m.scouting.slice(0,6);state.balance=Math.max(0,state.balance-250);addNotice('scout',`Scout report received on ${target.name}.`);save();render()}
+function scoutingPage(){ensureDeepManagement();let m=state.management;return `<div class="card"><h2>Scouting</h2><p class="muted">Spend €250 to discover a potential transfer target.</p><button class="btn primary" onclick="scoutPlayer()">Send Scout</button>${m.scouting.map(x=>`<div class="notice" style="margin-top:10px"><b>${esc(x.name)}</b> · ${x.position}<br><span class="mini">OVR ${x.overall} · ${esc(x.club)} · Estimated value ${fmtMoney(x.value)}</span></div>`).join('')}</div>`}
+function applyManagementSystems(){ensureDeepManagement();objectiveProgress();state.management.teammates.forEach(t=>{t.morale=Math.max(40,Math.min(100,t.morale+rand(-2,2)));t.chemistry=Math.max(40,Math.min(100,t.chemistry+rand(-1,2)))});state.management.teamMorale=Math.round(state.management.teammates.reduce((a,t)=>a+t.morale,0)/state.management.teammates.length);}
+const oldSimulateMatch=simulateMatch;
+simulateMatch=function(){ensureDeepManagement();if(state.management.tactic==='Attacking')state.player.fitness=Math.max(25,state.player.fitness-2);oldSimulateMatch();if(state){let m=state.management;let last=state.matches[0];if(last){if(last.teamScore>last.opponentScore){m.seasonWins++;m.fanPopularity=Math.min(100,m.fanPopularity+2)}if(last.rating>=7.5)m.fanPopularity=Math.min(100,m.fanPopularity+1);m.chemistry=Math.min(100,m.chemistry+(last.teamScore>=last.opponentScore?2:0));applyManagementSystems();save();}}};
+const oldAdvance=advanceWeekManagement;
+advanceWeekManagement=function(){ensureDeepManagement();oldAdvance();if(state){let m=state.management;m.teamMorale=Math.round(m.teammates.reduce((a,t)=>a+t.morale,0)/m.teammates.length);if(m.staff.fitness>1)state.player.fitness=Math.min(100,state.player.fitness+m.staff.fitness-1);save();}};
+const oldEndSeason=endSeason;
+endSeason=function(){ensureDeepManagement();oldEndSeason();if(state&&!state.isRetired){state.management.contractTalks=0;state.management.seasonWins=0;state.management.teamMorale=70;state.management.inbox.unshift({id:uid(),title:`Season ${state.currentSeason-1} completed`,body:`Your season has ended. Review your history and prepare for the next campaign.`,week:1});save();}};
+
+/* SINGLE-PLAYER CAREER FINAL SYSTEMS */
+function ensureCareerLife(){
+  if(!state.management) state.management={};
+  const m=state.management;
+  if(m.fanPopularity==null)m.fanPopularity=25;
+  if(!m.agent)m.agent={level:1,trust:50};
+  if(!m.endorsements)m.endorsements=[];
+  if(!m.media)m.media={reputation:20,stories:0};
+  if(!m.leadership)m.leadership={captaincy:0,voice:50};
+  if(!m.lifestyle)m.lifestyle={health:75,focus:70};
+  if(!m.matchPrep)m.matchPrep=null;
+  if(!m.lifeEvent)m.lifeEvent=null;
+  if(!m.lifeHistory)m.lifeHistory=[];
+  if(!m.international)m.international={calledUp:false,caps:0,goals:0,assists:0,tournaments:0,bestTournament:0};
+  if(m.international.calledUp==null)m.international.calledUp=false;
+}
+
+const LIFE_EVENTS=[
+ {id:'manager',title:'Manager Conversation',text:'Your manager wants to know what you will focus on this week.',choices:[
+  ['training','Ask for extra training',()=>{state.player.energy=Math.max(0,state.player.energy-10);state.player.form=Math.min(99,state.player.form+3);state.management.managerTrust=Math.min(100,state.management.managerTrust+4);state.player.morale=Math.min(100,state.player.morale+2)}],
+  ['recovery','Ask for recovery time',()=>{state.player.fitness=Math.min(100,state.player.fitness+8);state.management.managerTrust=Math.min(100,state.management.managerTrust+2)}],
+  ['playing','Ask for more playing time',()=>{state.management.managerTrust=Math.min(100,state.management.managerTrust+1);state.player.morale=Math.min(100,state.player.morale+4)}]
+ ]},
+ {id:'agent',title:'Agent Opportunity',text:'Your agent says clubs are beginning to notice your performances.',choices:[
+  ['stay','Tell the agent to monitor the market',()=>{state.management.agent.trust=Math.min(100,state.management.agent.trust+5);state.player.reputation+=2}],
+  ['push','Ask the agent to actively seek a move',()=>{state.management.agent.trust=Math.min(100,state.management.agent.trust+2);state.player.reputation+=4}],
+  ['contract','Focus on improving your current contract',()=>{state.management.agent.trust=Math.min(100,state.management.agent.trust+6);state.player.morale=Math.min(100,state.player.morale+2)}]
+ ]},
+ {id:'media','title':'Media Attention',text:'A journalist asks about your recent performances.',choices:[
+  ['confident','Give a confident interview',()=>{state.management.media.reputation=Math.min(100,state.management.media.reputation+4);state.management.fanPopularity=Math.min(100,state.management.fanPopularity+4);state.player.reputation+=2}],
+  ['humble','Keep the focus on the team',()=>{state.management.media.reputation=Math.min(100,state.management.media.reputation+2);state.management.managerTrust=Math.min(100,state.management.managerTrust+3)}],
+  ['private','Decline and focus on football',()=>{state.management.lifestyle.focus=Math.min(100,state.management.lifestyle.focus+4);state.player.morale=Math.max(0,state.player.morale-1)}]
+ ]},
+ {id:'lifestyle','title':'Free Day',text:'You have a free day. How do you spend it?',choices:[
+  ['rest','Recover and rest',()=>{state.management.lifestyle.health=Math.min(100,state.management.lifestyle.health+8);state.player.fitness=Math.min(100,state.player.fitness+7)}],
+  ['focus','Extra individual work',()=>{state.management.lifestyle.focus=Math.min(100,state.management.lifestyle.focus+8);state.player.form=Math.min(99,state.player.form+2);state.player.energy=Math.max(0,state.player.energy-6)}],
+  ['social','Spend time with friends and family',()=>{state.player.morale=Math.min(100,state.player.morale+7);state.management.lifestyle.focus=Math.max(20,state.management.lifestyle.focus-2)}]
+ ]},
+ {id:'endorsement','title':'Brand Opportunity',text:'A sports brand is interested in working with you.',choices:[
+  ['accept','Explore the partnership',()=>{state.management.fanPopularity=Math.min(100,state.management.fanPopularity+3);state.player.reputation+=2;state.balance+=500}],
+  ['decline','Stay fully focused on football',()=>{state.player.morale=Math.min(100,state.player.morale+2);state.management.lifestyle.focus=Math.min(100,state.management.lifestyle.focus+3)}]
+ ]},
+ {id:'rival','title':'Rival Challenge',text:'Your rival has been talking about becoming the better player. How do you respond?',choices:[
+  ['focus','Let your football answer',()=>{state.player.form=Math.min(99,state.player.form+4);state.management.lifestyle.focus=Math.min(100,state.management.lifestyle.focus+3)}],
+  ['media','Accept the challenge publicly',()=>{state.management.media.reputation=Math.min(100,state.management.media.reputation+3);state.management.fanPopularity=Math.min(100,state.management.fanPopularity+3)}]
+ ]}
+];
+function generateLifeEvent(force=false){
+ ensureCareerLife();
+ if(state.management.lifeEvent&&!force)return;
+ if(!force && Math.random()>0.38)return;
+ let e=choose(LIFE_EVENTS);
+ state.management.lifeEvent={id:e.id,title:e.title,text:e.text,choices:e.choices.map(x=>[x[0],x[1]]),createdWeek:state.currentWeek,createdSeason:state.currentSeason};
+ save();
+}
+function chooseLifeEvent(i){
+ ensureCareerLife();let e=state.management.lifeEvent;if(!e)return;
+ let source=LIFE_EVENTS.find(x=>x.id===e.id);let c=source?.choices?.[i];if(!c)return;
+ c[2]();
+ state.management.lifeHistory.unshift({title:e.title,choice:c[1],week:e.createdWeek,season:e.createdSeason});
+ state.management.lifeHistory=state.management.lifeHistory.slice(0,12);
+ state.management.lifeEvent=null;
+ addNotice('career',`${e.title}: ${c[1]}`);
+ save();render();
+}
+function playerManagementPage(){
+ ensureCareerLife();let p=state.player,m=state.management;
+ const plans=[['balanced','Balanced Week','Keep everything steady.','Small form, fitness and trust gains.'],['training','Development Week','Prioritize individual training.','Better development, lower energy.'],['recovery','Recovery Week','Protect your body.','Higher fitness and health, slower development.'],['match','Match Focus','Prepare for your next appearance.','Better match form and manager trust.']];
+ return `<div class="grid g2"><div class="card"><h2>Plan Your Week</h2><p class="muted">You control only your player's career decisions. No squad or club management.</p><div class="grid g2">${plans.map(x=>`<button class="card decision ${m.prep===x[0]?'selected':''}" onclick="choosePlan('${x[0]}')"><b>${x[1]}</b><span class="mini">${x[2]}</span><br><span class="mini">${x[3]}</span></button>`).join('')}</div><div class="notice" style="margin-top:14px">Current plan: <b>${m.prep||'Balanced'}</b><br>Manager trust: <b>${m.managerTrust||50}</b></div></div><div class="card"><h2>Player Status</h2><div class="grid g2"><div><div class="label">Energy</div><div class="stat">${p.energy}</div></div><div><div class="label">Fitness</div><div class="stat">${p.fitness}</div></div><div><div class="label">Form</div><div class="stat">${p.form}</div></div><div><div class="label">Morale</div><div class="stat">${p.morale}</div></div></div><div class="notice">Next: ${state.currentWeek<12?'Continue the season.':'Season review is approaching.'}</div></div></div><div class="card section"><h2>Career Decisions</h2>${lifeEventHtml()}</div>`;
+}
+function lifeEventHtml(){ensureCareerLife();let e=state.management.lifeEvent;if(!e)return `<div class="notice"><b>No decision waiting.</b><br><span class="mini">Career events can appear as your week progresses.</span></div><button class="btn" onclick="generateLifeEvent(true)">Check Career Opportunities</button>`;return `<div class="notice"><h3>${esc(e.title)}</h3><p class="muted">${esc(e.text)}</p>${e.choices.map((c,i)=>`<button class="btn ${i===0?'primary':''}" style="margin-top:8px" onclick="chooseLifeEvent(${i})">${esc(c[1])}</button>`).join('')}</div>`}
+function careerPage(){
+ let p=state.player,s=state.season,r=state.rival,avg=s.appearances?(s.ratingTotal/s.appearances).toFixed(1):'—';ensureCareerLife();let intl=state.management.international;
+ return `<div class="grid g2"><div class="card"><h2>Season ${state.currentSeason}</h2><div class="grid g3"><div><div class="label">Week</div><div class="stat">${state.currentWeek}</div></div><div><div class="label">Apps</div><div class="stat">${s.appearances}</div></div><div><div class="label">Rating</div><div class="stat">${avg}</div></div><div><div class="label">Goals</div><div class="stat">${s.goals}</div></div><div><div class="label">Assists</div><div class="stat">${s.assists}</div></div><div><div class="label">Trophies</div><div class="stat">${state.seasonTrophies.length}</div></div></div></div><div class="card"><h2>International Career</h2><div class="grid g3"><div><div class="label">Caps</div><div class="stat">${intl.caps}</div></div><div><div class="label">Goals</div><div class="stat">${intl.goals}</div></div><div><div class="label">Assists</div><div class="stat">${intl.assists}</div></div></div><div class="notice">${intl.calledUp?'<b class="green">National-team call-up available.</b>':'<b>Not selected yet.</b>'}<br><span class="mini">International opportunities become more likely as your overall and reputation grow.</span></div>${intl.calledUp?'<button class="btn primary" onclick="playInternationalMatch()">Play International Match</button>':''}</div></div><div class="grid g2 section"><div class="card"><h2>Career Rival</h2><p><b>${esc(p.name)}</b> vs <b>${esc(r.name)}</b></p><div class="notice">Your career goals: ${p.careerGoals} · Rival goals: ${r.goals}</div><button class="btn" onclick="setView('rival')">Open Rival</button></div><div class="card"><h2>Career History</h2>${state.history.slice(0,6).map(h=>`<div class="notice"><b>Season ${h.season} · ${esc(h.club)}</b><br><span class="mini">${h.appearances} apps · ${h.goals} goals · ${h.assists} assists · ${h.rating} rating</span></div>`).join('')||'<div class="empty">Your history will appear here.</div>'}</div></div>`;
+}
+function playInternationalMatch(){
+ ensureCareerLife();let m=state.management,i=m.international,p=state.player;
+ if(!i.calledUp){toast('No international match is available.');return}
+ let impact=p.overall+(p.form-70)*.15+(p.fitness-70)*.1;let goals=Math.random()<(impact/100)*.32?1:0;let assists=goals===0&&Math.random()<.18?1:0;i.caps++;i.goals+=goals;i.assists+=assists;if(Math.random()<.12)i.tournaments++;i.calledUp=false;p.morale=Math.min(100,p.morale+3);p.reputation+=2+goals*2;addNotice('international',`International match: ${goals} goal(s), ${assists} assist(s).`);save();render();}
+function maybeInternationalCallUp(){ensureCareerLife();let p=state.player,i=state.management.international;if(i.calledUp||p.age<17)return;if(p.overall>=70&&p.reputation>=35&&Math.random()<0.10){i.calledUp=true;addNotice('international','You have received an international call-up.');}}
+function playerDashboard(){ensureCareerLife();let p=state.player,c=state.club,r=state.rival,m=state.management,i=m.international;return `<div class="grid g4"><div class="card"><div class="label">Overall</div><div class="stat green">${p.overall}</div><div class="mini">Potential ${p.potential}</div></div><div class="card"><div class="label">Age</div><div class="stat">${p.age}</div><div class="mini">Season ${state.currentSeason}</div></div><div class="card"><div class="label">Balance</div><div class="stat">${fmtMoney(state.balance)}</div><div class="mini">${fmtMoney(p.weeklySalary)}/week</div></div><div class="card"><div class="label">Market Value</div><div class="stat gold">${fmtMoney(market(p))}</div><div class="mini">Rep ${p.reputation}</div></div></div><div class="grid g2 section"><div class="card"><div class="top"><div><h2>${esc(p.name)}</h2><div class="muted">${p.position} · ${p.nationality} · ${p.foot} foot</div></div><span class="pill">${c.short}</span></div><p><b>${esc(c.name)}</b> · ${esc(c.league)}</p><div class="grid g2"><div><div class="label">Form ${p.form}</div><div class="bar"><i style="width:${p.form}%"></i></div></div><div><div class="label">Fitness ${p.fitness}</div><div class="bar"><i style="width:${p.fitness}%"></i></div></div></div></div><div class="card"><h2>Next Match</h2>${nextMatchHtml()}</div></div><div class="grid g3 section"><div class="card"><div class="label">Season Goals</div><div class="stat">${state.season.goals}</div></div><div class="card"><div class="label">Rival Goals</div><div class="stat">${r.goals}</div></div><div class="card"><div class="label">International</div><div class="stat">${i.caps} caps</div><div class="mini">${i.goals} goals</div></div></div><div class="card"><h2>What Should You Do?</h2><div class="grid g3"><button class="btn primary" onclick="setView('management')">Plan Week</button><button class="btn" onclick="setView('training')">Train Player</button><button class="btn" onclick="setView('matches')">Play Match</button></div></div>`}
+
+/* Make the weekly loop generate player-life decisions and international opportunities. */
+const __finalAdvance=advanceWeekManagement;
+advanceWeekManagement=function(){
+ ensureCareerLife();
+ __finalAdvance();
+ if(state&&!state.isRetired){
+   generateLifeEvent(false);
+   maybeInternationalCallUp();
+   save();
+ }
+};
+
+
+/* Player-only weekly planning and life hub */
+choosePlan=function(plan){
+ ensureCareerLife();
+ if(state.management.prep){toast('You already chose this week plan.');return}
+ const p=state.player,m=state.management;
+ const effects={
+  balanced:['Balanced Week',0,0,1,1,1],
+  training:['Development Week',-8,-5,3,0,2],
+  recovery:['Recovery Week',4,12,0,1,2],
+  match:['Match Focus',-5,-3,3,2,3]
+ };
+ const e=effects[plan]||effects.balanced;
+ m.prep=plan;m.weeklyPlan=e[0];
+ p.energy=Math.max(0,p.energy+e[1]);p.fitness=Math.max(25,p.fitness+e[2]);
+ p.form=Math.min(99,p.form+e[3]);p.morale=Math.min(100,p.morale+e[4]);
+ m.managerTrust=Math.max(0,Math.min(100,(m.managerTrust||50)+e[5]));
+ addNotice('management',`Weekly plan selected: ${e[0]}.`);save();render();
+};
+function playerLifePage(){
+ ensureCareerLife();let m=state.management,p=state.player;
+ const endCost=2500+m.endorsements.length*1500;
+ return `<div class="grid g2"><div class="card"><h2>Agent</h2><p class="muted">Your agent handles opportunities while you focus on football.</p><div class="notice">Level <b>${m.agent.level}</b> · Trust <b>${m.agent.trust}</b></div><div class="grid g2"><button class="btn" onclick="meetAgent()">Meet Agent</button><button class="btn" onclick="agentNegotiation()">Find Offers</button></div></div><div class="card"><h2>Media & Fans</h2><div class="grid g2"><div><div class="label">Media reputation</div><div class="stat">${m.media.reputation}</div></div><div><div class="label">Fan popularity</div><div class="stat">${m.fanPopularity}</div></div></div><div class="grid g2"><button class="btn" onclick="mediaInterview()">Interview</button><button class="btn" onclick="socialPost()">Career Update</button></div></div></div><div class="grid g2 section"><div class="card"><h2>Endorsements</h2><p class="muted">Optional income and reputation opportunities.</p>${m.endorsements.length?m.endorsements.map(e=>`<div class="notice"><b>${esc(e.name)}</b><br><span class="mini">+${fmtMoney(e.income)} per week · Popularity +${e.pop}</span></div>`).join(''):'<div class="notice">No active deals.</div>'}<button class="btn primary" onclick="signEndorsement()">Look for Deal · ${fmtMoney(endCost)}</button></div><div class="card"><h2>Player Lifestyle</h2><div class="grid g2"><div><div class="label">Health</div><div class="stat">${m.lifestyle.health}</div></div><div><div class="label">Focus</div><div class="stat">${m.lifestyle.focus}</div></div></div><div class="grid g3"><button class="btn" onclick="lifestyleChoice('rest')">Recover</button><button class="btn" onclick="lifestyleChoice('focus')">Extra Focus</button><button class="btn" onclick="lifestyleChoice('social')">Social Time</button></div></div></div><div class="grid g2 section"><div class="card"><h2>Leadership</h2><div class="grid g3"><div><div class="label">Voice</div><div class="stat">${m.leadership.voice}</div></div><div><div class="label">Captaincy</div><div class="stat">${m.leadership.captaincy}%</div></div><div><div class="label">Manager Trust</div><div class="stat">${m.managerTrust||50}</div></div></div><button class="btn" onclick="askCaptaincy()">Push for Captaincy</button></div><div class="card"><h2>Recent Decisions</h2>${m.lifeHistory.length?m.lifeHistory.slice(0,6).map(x=>`<div class="notice"><b>${esc(x.title)}</b><br><span class="mini">${esc(x.choice)} · S${x.season} W${x.week}</span></div>`).join(''):'<div class="empty">Your career decisions will appear here.</div>'}</div></div><div class="card section"><h2>Current Career Event</h2>${lifeEventHtml()}</div>`;
+}
+proPage=playerLifePage;
+/* Remove team/club administration from the visible game loop. */
+function nav(){return `<div class="nav">${[['dashboard','Dashboard'],['management','Week Plan'],['career','Career'],['training','Training'],['matches','Matches'],['transfer','Transfers'],['life','Player Life'],['rival','Rival'],['challenges','Challenges'],['profile','Profile']].map(([id,n])=>`<button class="${view===id?'active':''}" onclick="setView('${id}')">${n}</button>`).join('')}</div>`}
+
+function app(){
+ if(view==='menu')return menuHtml();
+ if(view==='creation')return creation();
+ if(!state)return menuHtml();
+ if(state.isRetired)return retired();
+ ensureCareerLife();
+ let body=view==='dashboard'?playerDashboard():view==='management'?playerManagementPage():view==='career'?careerPage():view==='training'?training():view==='matches'?matches():view==='transfer'?transfer():view==='life'?proPage():view==='rival'?rival():view==='challenges'?challenges():profile();
+ return `<div class="wrap"><div class="top"><div class="brand"><div class="logo">FC</div><div><b>FOOTBALL CAREER SIMULATOR</b><div class="muted">S${state.currentSeason} · Week ${state.currentWeek}</div></div></div><div class="top-actions"><button class="btn" onclick="setView('profile')">${esc(state.player.name)}</button><button class="btn" onclick="menu()">Menu</button><button class="btn danger" onclick="retire()">Retire</button></div></div>${nav()}<div class="section">${body}</div><div class="card" style="margin-top:14px"><div class="top"><div><b>Career Controls</b><div class="mini">Autosaved locally in this browser</div></div><button class="btn primary" onclick="advanceWeekManagement()">Advance Week</button></div></div></div>`;
+}
+
+// Compatibility aliases used by inline buttons.
+window.chooseLifeEvent=chooseLifeEvent;window.generateLifeEvent=generateLifeEvent;window.playInternationalMatch=playInternationalMatch;window.playerManagementPage=playerManagementPage;window.careerPage=careerPage;
+
+function nav(){return `<div class="nav">${[['dashboard','Dashboard'],['management','Manage Week'],['squad','Squad'],['training','Training'],['matches','Matches'],['season','Season'],['club','Club'],['transfer','Transfers'],['scouting','Scouting'],['finance','Finance'],['pro','Life & Media'],['rival','Rival'],['challenges','Challenges'],['inbox','Inbox'],['profile','Profile']].map(([id,n])=>`<button class="${view===id?'active':''}" onclick="setView('${id}')">${n}</button>`).join('')}</div>`}
+const oldApp=app;
+app=function(){if(view==='menu')return menuHtml();if(view==='creation')return creation();if(!state)return menuHtml();if(state.isRetired)return retired();let body=view==='dashboard'?dashboard():view==='management'?management():view==='squad'?squadPage():view==='training'?training():view==='matches'?matches():view==='season'?seasonPage():view==='club'?clubPage():view==='transfer'?transfer():view==='scouting'?scoutingPage():view==='finance'?financePage():view==='pro'?proPage():view==='rival'?rival():view==='challenges'?challenges():view==='inbox'?inboxPage():profile();return `<div class="wrap"><div class="top"><div class="brand"><div class="logo">FC</div><div><b>FOOTBALL CAREER SIMULATOR</b><div class="muted">S${state.currentSeason} · Week ${state.currentWeek}</div></div></div><div class="top-actions"><button class="btn" onclick="setView('profile')">${esc(state.player.name)}</button><button class="btn" onclick="menu()">Menu</button><button class="btn danger" onclick="retire()">Retire</button></div></div>${nav()}<div class="section">${body}</div><div class="card" style="margin-top:14px"><div class="top"><div><b>Career Controls</b><div class="mini">Autosaved locally in this browser</div></div><button class="btn primary" onclick="advanceWeekManagement()">Advance Week</button></div></div></div>`}
+window.proPage=proPage;window.mediaInterview=mediaInterview;window.socialPost=socialPost;window.meetAgent=meetAgent;window.agentNegotiation=agentNegotiation;window.signEndorsement=signEndorsement;window.leadTeam=leadTeam;window.askCaptaincy=askCaptaincy;window.upgradeFacility=upgradeFacility;window.lifestyleChoice=lifestyleChoice;window.matchPrep=matchPrep;window.chooseTactic=chooseTactic;window.upgradeStaff=upgradeStaff;window.scoutPlayer=scoutPlayer;
+window.startCreation=startCreation;window.menu=menu;window.createFromForm=createFromForm;window.continueCareer=continueCareer;window.clearCareer=clearCareer;window.confirmDelete=confirmDelete;window.setView=setView;window.simulateMatch=simulateMatch;window.advanceWeek=advanceWeekManagement;window.train=train;window.doTransfer=doTransfer;window.retire=retire;window.newCareerFromRetire=newCareerFromRetire;window.settings=settings;window.toggleSetting=toggleSetting;window.choosePlan=choosePlan;window.setClubObjective=setClubObjective;window.negotiateContract=negotiateContract;window.requestPlayingTime=requestPlayingTime;window.teamChemistry=teamChemistry;window.advanceWeekManagement=advanceWeekManagement;
+/* LOCAL MUSIC SYSTEM */
+const MUSIC_TRACKS={
+  main:'music/main.mp3',
+  rival:'music/rival.mp3',
+  victory:'music/victory.mp3'
+};
+let musicAudio=null, currentMusicTrack='';
+function initMusic(){
+  if(musicAudio)return;
+  musicAudio=new Audio();
+  musicAudio.loop=true;
+  musicAudio.preload='auto';
+  musicAudio.volume=0.35;
+  musicAudio.addEventListener('error',()=>{});
+}
+function playMusic(track='main'){
+  initMusic();
+  if(!state || state.settings?.music===false)return;
+  const src=MUSIC_TRACKS[track]||MUSIC_TRACKS.main;
+  if(currentMusicTrack!==src){
+    currentMusicTrack=src;
+    musicAudio.src=src;
+    musicAudio.load();
+  }
+  musicAudio.play().catch(()=>{});
+}
+function stopMusic(){if(musicAudio)musicAudio.pause();}
+function setMusicVolume(v){initMusic();musicAudio.volume=Math.max(0,Math.min(1,Number(v))); }
+function musicForView(v){
+  if(v==='rival')return 'rival';
+  if(v==='dashboard'||v==='profile'||v==='season'||v==='club'||v==='squad'||v==='training'||v==='management'||v==='transfer'||v==='scouting'||v==='finance'||v==='pro'||v==='inbox'||v==='matches'||v==='challenges')return 'main';
+  return 'main';
+}
+document.addEventListener('click',()=>{if(state&&state.settings?.music!==false)playMusic(musicForView(view));},{passive:true});
+const _oldSetViewMusic=setView;
+setView=function(v){_oldSetViewMusic(v); if(state&&state.settings?.music!==false)playMusic(musicForView(v));};
+const _oldToggleSettingMusic=toggleSetting;
+toggleSetting=function(k,v){
+  _oldToggleSettingMusic(k,v);
+  if(k==='music'){
+    if(v)playMusic(musicForView(view)); else stopMusic();
+  }
+};
+
+
+const _musicEndSeason=endSeason;
+endSeason=function(){
+  _musicEndSeason();
+  if(state && state.settings?.music!==false)playMusic('victory');
+};
+const _musicSimulate=simulateMatch;
+simulateMatch=function(){
+  _musicSimulate();
+  if(state && state.matches && state.matches[0] && state.settings?.music!==false){
+    const m=state.matches[0];
+    if(m.teamScore>m.opponentScore) playMusic('victory');
+    else playMusic('main');
+  }
+};
+
+render();
+window.chooseLifeEvent=chooseLifeEvent;window.generateLifeEvent=generateLifeEvent;window.playInternationalMatch=playInternationalMatch;window.advanceWeekManagement=advanceWeekManagement;render();</script></body></html>
